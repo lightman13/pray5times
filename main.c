@@ -29,7 +29,7 @@ static int calculate_time(struct compute_time *compute_time)
 	long int timezone;
 	struct tm *tm;
 
-	tm = localtime(&t);	
+	tm = localtime(&t);
 
 	timezone = second_to_hour(tm->tm_gmtoff);
 
@@ -39,7 +39,7 @@ static int calculate_time(struct compute_time *compute_time)
 
 	julian_date = convert_gregorian_to_julian(tm);
 
-	fprintf(stdout, "Julian_Date: %lf\n", julian_date); 
+	fprintf(stdout, "Julian_Date: %lf\n", julian_date);
 
 	compute_equation_of_time(julian_date, &equa_of_time);
 
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
 	while((c = getopt(argc, argv, "hl:L:")) != -1) {
 		switch(c) {
 			case 'l':
-				compute_time.latitude = atof(optarg); 
+				compute_time.latitude = atof(optarg);
 				fprintf(stdout, "Latitude: %f\n", compute_time.latitude);
 				break;
 			case 'L':
@@ -72,7 +72,7 @@ int main(int argc, char **argv)
 			case 'h':
 				fprintf(stdout, "%s\n", usage);
 				break;
-			
+
 			default:
 				fprintf(stderr, "%s\n", usage);
 				break;
