@@ -20,7 +20,7 @@ double range_hour(double hour)
 
 double radian_to_degree(double radian)
 {
-	return (radian * 180) / M_PI; 
+	return (radian * 180) / M_PI;
 }
 
 double degree_to_radian(double degree)
@@ -31,7 +31,7 @@ double degree_to_radian(double degree)
 
 double angle_to_hour(double angle)
 {
-	return angle / 15; 
+	return angle / 15;
 }
 
 long int second_to_hour(long int second)
