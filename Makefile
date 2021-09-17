@@ -19,5 +19,5 @@ clean:
 mrproper: clean
 	rm -f ${PROG}
 
-cppccheck:
+cppcheck:
 	${CPPCHECK} ${cppcheck_flags} *.[ch] 
