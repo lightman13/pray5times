@@ -1,7 +1,9 @@
 CC=gcc
 CPPCHECK := cppcheck
 cppcheck_flags := --enable=all --inconclusive --inline-suppr	\
-		  --suppress=missingIncludeSystem --library=gnu
+		  --suppress=missingIncludeSystem --library=gnu \
+		  --quiet
+
 PROG := prayer_time
 OBJS := main.o utils.o sun_position.o cal_prayer.o
 CFLAGS=-Wall -O -g -lm
