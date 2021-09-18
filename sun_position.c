@@ -2,92 +2,80 @@
 
 #include "prayer_time.h"
 
-int compute_equation_of_time(double julian_date, double *equa_of_time)
+int compute_equation_of_time(double *equa_of_time , struct calc_param *param)
 {
-	double M, C, lambda, e;
-	double true_long;
-	double v;
-	double alpha;
-	double epsilon;
-	double phi;
-	double omega;
-	double l_sun;
-	double l_moon;
-
 	/* Compute equation of time */
 
-	julian_date = (julian_date - 2451545.0) / 36525;
-	//julian_date = -0.07218343600;
-	//julian_date = -0.127296372348;
+	param->julian_date = (param->julian_date - 2451545.0) / 36525;
 
 	/* Calcul de la longitude écliptique */
-	lambda = 280.4665 + 36000.76983 * julian_date + 0.0003032 * pow(julian_date, 2);
+	param->lambda = 280.4665 + 36000.76983 * param->julian_date + 0.0003032 * pow(param->julian_date, 2);
 
-	lambda = range_angle(lambda);
+	param->lambda = range_angle(param->lambda);
 
-	fprintf(stdout, "lambda %lf\n", lambda);
+	fprintf(stdout, "lambda %lf\n", param->lambda);
 
 	/* Calcul de l'anomalie moyenne */
-	M = 357.5291 + 35999.05029 * julian_date + 0.0001537 * pow(julian_date, 2);
+	param->M = 357.5291 + 35999.05029 * param->julian_date + 0.0001537 * pow(param->julian_date, 2);
 
-	M = range_angle(M);
-	fprintf(stdout, "M %lf\n", M);
+	param->M = range_angle(param->M);
+	fprintf(stdout, "M %lf\n", param->M);
 	/* Calcul de l'eccentritcity of the Earth's orbit */
-	e = 0.016708634 - 0.000042037 * julian_date - 0.0000001267 * pow(julian_date, 2);
-	fprintf(stdout, "e %lf\n", e);
+	param->e = 0.016708634 - 0.000042037 * param->julian_date - 0.0000001267 * pow(param->julian_date, 2);
+	fprintf(stdout, "e %lf\n", param->e);
 
 	/* Calcul de l'ellipticité de la tajectoire */
-	C = (1.914602 - 0.004817 * julian_date - 0.000014 * pow(julian_date, 2)) * sin(degree_to_radian(M)) +
-	    (0.019993 - 0.000101 * julian_date) * sin(degree_to_radian(2 *  M)) +
-	    0.000289 * sin(degree_to_radian(3 * M));
+	param->C = (1.914602 - 0.004817 * param->julian_date - 0.000014 * pow(param->julian_date, 2)) * sin(degree_to_radian(param->M)) +
+		   (0.019993 - 0.000101 * param->julian_date) * sin(degree_to_radian(2 *  param->M)) +
+		   0.000289 * sin(degree_to_radian(3 * param->M));
 
-	fprintf(stdout, "C = %lf\n", C);
+	fprintf(stdout, "C = %lf\n", param->C);
 
 	/* Sun's true longitude */
-	true_long = lambda + C;
+	param->true_long = param->lambda + param->C;
 
-	fprintf(stdout, "true_log %lf\n", true_long);
+	fprintf(stdout, "true_log %lf\n", param->true_long);
 	/* True anomaly */
-	v = M + C;
+	param->v = param->M + param->C;
 
-	epsilon = 23.439 - 0.00000036 * julian_date;
+	param->epsilon = 23.439 - 0.00000036 * param->julian_date;
 
-	fprintf(stdout, "epsilon %lf\n", epsilon);
+	fprintf(stdout, "epsilon %lf\n", param->epsilon);
 
-	alpha = atan2(cos(degree_to_radian(epsilon)) * sin(degree_to_radian(true_long)),
-			cos(degree_to_radian(true_long)));
+	param->alpha = atan2(cos(degree_to_radian(param->epsilon)) * sin(degree_to_radian(param->true_long)),
+			cos(degree_to_radian(param->true_long)));
 
-	alpha = radian_to_degree(alpha);
+	param->alpha = radian_to_degree(param->alpha);
 
-	alpha = range_angle(alpha);
-	fprintf(stdout, "Right ascension %lf\n", alpha);
+	param->alpha = range_angle(param->alpha);
+	fprintf(stdout, "Right ascension %lf\n", param->alpha);
 
-	lambda = 280.4665 + 36000.76983 * julian_date + 0.0003032 * pow(julian_date, 2) +
-		(pow(julian_date, 3) / 49931) - (pow(julian_date, 4)  / 15300) -
-		(pow(julian_date, 5) / 2000000);
+	param->lambda = 280.4665 + 36000.76983 * param->julian_date + 0.0003032 * pow(param->julian_date, 2) +
+			(pow(param->julian_date, 3) / 49931) - (pow(param->julian_date, 4)  / 15300) -
+			(pow(param->julian_date, 5) / 2000000);
 
-	lambda = range_angle(lambda);
-	fprintf(stdout, "lambda %lf\n", lambda);
+	param->lambda = range_angle(param->lambda);
+	fprintf(stdout, "lambda %lf\n", param->lambda);
 
-	omega = 125.04452 - 1934.136261 * julian_date + 0.0020708 * pow(julian_date, 2) +
-		pow(julian_date, 3) / 450000;
-	omega = range_angle(omega);
-	fprintf(stdout, "omega %lf\n", omega);
+	param->omega = 125.04452 - 1934.136261 * param->julian_date + 0.0020708 * pow(param->julian_date, 2) +
+		       pow(param->julian_date, 3) / 450000;
+	param->omega = range_angle(param->omega);
+	fprintf(stdout, "omega %lf\n", param->omega);
 
-	l_sun = 280.4665+36000.7698*julian_date;
-	l_moon = 218.3165 + 481267.8813 * julian_date;
+	param->l_sun = 280.4665+36000.7698 * param->julian_date;
+	param->l_moon = 218.3165 + 481267.8813 * param->julian_date;
 
-	l_sun= range_angle(l_sun);
-	l_moon = range_angle(l_moon);
+	param->l_sun= range_angle(param->l_sun);
+	param->l_moon = range_angle(param->l_moon);
 
-	phi = -17.20 * sin(degree_to_radian(omega)) - 1.32 * sin(degree_to_radian(2 * l_sun)) -
-		0.23 * sin(degree_to_radian(2*l_moon)) + 0.21 * sin(degree_to_radian(2 * omega));
+	param->phi = -17.20 * sin(degree_to_radian(param->omega)) - 1.32 * sin(degree_to_radian(2 * param->l_sun)) -
+		0.23 * sin(degree_to_radian(2*param->l_moon)) + 0.21 * sin(degree_to_radian(2 * param->omega));
 
-	fprintf(stdout, "phi %lf\n", phi);
-	phi = phi / 3600;
-	fprintf(stdout, "phi %lf\n", phi);
+	fprintf(stdout, "phi %lf\n", param->phi);
+	param->phi = param->phi / 3600;
+	fprintf(stdout, "phi %lf\n", param->phi);
 
-	*equa_of_time = lambda - 0.0057183 - alpha + phi * cos(degree_to_radian(epsilon)) ;
+	*equa_of_time = param->lambda - 0.0057183 - param->alpha + param->phi * cos(degree_to_radian(param->epsilon)) ;
 
 	fprintf(stdout, "equa_time %lf\n", *equa_of_time);
 	*equa_of_time = *equa_of_time / 15;
@@ -97,7 +85,7 @@ int compute_equation_of_time(double julian_date, double *equa_of_time)
 	return 0;
 }
 
-int compute_declination_sun(double julian_date, double *declination_sun)
+int compute_declination_sun(double *declination_sun, struct calc_param *param)
 {
 	return 0;
 }
