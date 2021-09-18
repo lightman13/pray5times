@@ -20,9 +20,8 @@ static double convert_gregorian_to_julian(struct tm *tm)
 	return julian_date;
 }
 
-static int calculate_time(struct compute_time *compute_time)
+static int calculate_time(struct compute_time *compute_time, struct calc_param *param)
 {
-	double julian_date;
 	double equa_of_time;
 	double declination_sun;
 	time_t t = time(NULL);
@@ -37,13 +36,13 @@ static int calculate_time(struct compute_time *compute_time)
 
 	fprintf(stdout, "Timezone : %ld\n", timezone);
 
-	julian_date = convert_gregorian_to_julian(tm);
+	param->julian_date = convert_gregorian_to_julian(tm);
 
-	fprintf(stdout, "Julian_Date: %lf\n", julian_date);
+	fprintf(stdout, "Julian_Date: %lf\n", param->julian_date);
 
-	compute_equation_of_time(julian_date, &equa_of_time);
+	compute_equation_of_time(&equa_of_time, param);
 
-	compute_declination_sun(julian_date, &declination_sun);
+	compute_declination_sun(&declination_sun, param);
 
 	fprintf(stdout, "Equation of time : %lf\n", equa_of_time);
 
@@ -57,6 +56,7 @@ int main(int argc, char **argv)
 	int c;
 	int rc;
 	struct compute_time compute_time = {0};
+	struct calc_param *param;
 
 	while((c = getopt(argc, argv, "hl:L:")) != -1) {
 		switch(c) {
@@ -84,9 +84,15 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	rc = calculate_time(&compute_time);
+	param = calloc(1, sizeof(struct calc_param));
+	if (param == NULL)
+		return 1;
+
+	rc = calculate_time(&compute_time, param);
 	if (rc != 0)
 		return 1;
+
+	free(param);
 
 	return 0;
 }

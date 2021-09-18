@@ -12,10 +12,49 @@ struct compute_time {
 	int calc_method;
 };
 
+struct calc_param {
+	double julian_date;
+
+	/* Ecliptique longitude */
+	double lambda;
+
+	/* Mean anomaly */
+	double M;
+
+	/* Eccentricity of the Earth's orbit */
+	double e;
+
+	/* Sun's equation of the center */
+	double C;
+
+	/* Sun's true longitude */
+	double true_long;
+
+	/* Nutation in obliquity */
+	double epsilon;
+
+	/* Right ascension */
+	double alpha;
+
+	/* Longitude of the ascending node of the Moon's
+	 * mean orbit on the ecliptic */
+	double omega;
+
+	double l_sun;
+
+	double l_moon;
+
+	/* Nutation in longitude */
+	double phi;
+
+	/* True anomaly */
+	double v;
+};
+
 /* Prototypes */
 
-int compute_equation_of_time(double julian_date, double *equa_of_time);
-int compute_declination_sun(double julian_date, double *declination_sun);
+int compute_equation_of_time(double *equa_of_time, struct calc_param *param);
+int compute_declination_sun(double *declination_sun, struct calc_param *param);
 time_t calculate_duhr_prayer(long int timezone, struct compute_time *compute_time, double equa_of_time);
 long int second_to_hour(long int second);
 double angle_to_hour(double angle);
