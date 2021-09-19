@@ -45,6 +45,7 @@ static int calculate_time(struct compute_time *compute_time, struct calc_param *
 	compute_declination_sun(&declination_sun, param);
 
 	fprintf(stdout, "Equation of time : %lf\n", equa_of_time);
+	fprintf(stdout, "Declination of sun : %lf\n", declination_sun);
 
 	calculate_duhr_prayer(timezone, compute_time, equa_of_time);
 

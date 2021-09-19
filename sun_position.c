@@ -87,5 +87,7 @@ int compute_equation_of_time(double *equa_of_time , struct calc_param *param)
 
 int compute_declination_sun(double *declination_sun, struct calc_param *param)
 {
+	*declination_sun = sin(degree_to_radian(param->epsilon)) * sin(degree_to_radian(param->true_long));
+
 	return 0;
 }
