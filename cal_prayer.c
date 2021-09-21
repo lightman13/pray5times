@@ -2,13 +2,13 @@
 
 #include "prayer_time.h"
 
-time_t calculate_duhr_prayer(long int timezone, struct compute_time *compute_time, double equa_of_time)
+time_t calculate_duhr_prayer(long int timezone, struct prayer_struct *prayer_struct, double equa_of_time)
 {
 	double duhr;
 	int hours;
 	int minutes;
 
-	duhr = 12 + timezone - compute_time->longitude / 15 - equa_of_time;
+	duhr = 12 + timezone - prayer_struct->longitude / 15 - equa_of_time;
 
 	fprintf(stdout, "Duhr before %lf\n", duhr);
 
@@ -20,7 +20,7 @@ time_t calculate_duhr_prayer(long int timezone, struct compute_time *compute_tim
 	return 0;
 }
 
-void calculate_fajr_prayer(struct compute_time *compute_time, double declination_sun)
+void calculate_fajr_prayer(struct prayer_struct *prayer_struct, double declination_sun)
 {
 	double fajr;
 	double T;
@@ -29,9 +29,9 @@ void calculate_fajr_prayer(struct compute_time *compute_time, double declination
 	int hours;
 	int minutes;
 
-	num = -sin(degree_to_radian(12)) - sin(degree_to_radian(compute_time->latitude)) * sin(declination_sun);
+	num = -sin(degree_to_radian(12)) - sin(degree_to_radian(prayer_struct->latitude)) * sin(declination_sun);
 	fprintf(stdout, "num: %lf\n", num);
-	deno = cos(degree_to_radian(compute_time->latitude)) * cos(declination_sun);
+	deno = cos(degree_to_radian(prayer_struct->latitude)) * cos(declination_sun);
 	fprintf(stdout, "deno: %lf\n", deno);
 	T = acos(num / deno);
 
@@ -47,7 +47,7 @@ void calculate_fajr_prayer(struct compute_time *compute_time, double declination
 	fprintf(stdout, "Fajr: %d:%d\n", hours, minutes);
 }
 
-void calculate_isha_prayer(struct compute_time *compute_time, double declination_sun)
+void calculate_isha_prayer(struct prayer_struct *prayer_struct, double declination_sun)
 {
 	double isha;
 	double T;
@@ -56,9 +56,9 @@ void calculate_isha_prayer(struct compute_time *compute_time, double declination
 	int hours;
 	int minutes;
 
-	num = -sin(degree_to_radian(12)) - sin(degree_to_radian(compute_time->latitude)) * sin(declination_sun);
+	num = -sin(degree_to_radian(12)) - sin(degree_to_radian(prayer_struct->latitude)) * sin(declination_sun);
 	fprintf(stdout, "num: %lf\n", num);
-	deno = cos(degree_to_radian(compute_time->latitude)) * cos(declination_sun);
+	deno = cos(degree_to_radian(prayer_struct->latitude)) * cos(declination_sun);
 	fprintf(stdout, "deno: %lf\n", deno);
 	T = acos(num / deno);
 
@@ -74,7 +74,7 @@ void calculate_isha_prayer(struct compute_time *compute_time, double declination
 	fprintf(stdout, "Isha: %d:%d\n", hours, minutes);
 }
 
-void calculate_maghrib_prayer(struct compute_time *compute_time, double declination_sun)
+void calculate_maghrib_prayer(struct prayer_struct *prayer_struct, double declination_sun)
 {
 	double maghrib;
 	double T;
@@ -83,9 +83,9 @@ void calculate_maghrib_prayer(struct compute_time *compute_time, double declinat
 	int hours;
 	int minutes;
 
-	num = -sin(degree_to_radian(0.833)) - sin(degree_to_radian(compute_time->latitude)) * sin(declination_sun);
+	num = -sin(degree_to_radian(0.833)) - sin(degree_to_radian(prayer_struct->latitude)) * sin(declination_sun);
 	fprintf(stdout, "num: %lf\n", num);
-	deno = cos(degree_to_radian(compute_time->latitude)) * cos(declination_sun);
+	deno = cos(degree_to_radian(prayer_struct->latitude)) * cos(declination_sun);
 	fprintf(stdout, "deno: %lf\n", deno);
 	T = acos(num / deno);
 

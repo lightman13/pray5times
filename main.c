@@ -20,7 +20,7 @@ static double convert_gregorian_to_julian(struct tm *tm)
 	return julian_date;
 }
 
-static int calculate_time(struct compute_time *compute_time, struct calc_param *param)
+static int calculate_time(struct prayer_struct *prayer_struct, struct calc_param *param)
 {
 	double equa_of_time;
 	double declination_sun;
@@ -47,11 +47,11 @@ static int calculate_time(struct compute_time *compute_time, struct calc_param *
 	fprintf(stdout, "Equation of time : %lf\n", equa_of_time);
 	fprintf(stdout, "Declination of sun : %lf\n", declination_sun);
 
-	calculate_duhr_prayer(timezone, compute_time, equa_of_time);
+	calculate_duhr_prayer(timezone, prayer_struct, equa_of_time);
 
-	calculate_fajr_prayer(compute_time, declination_sun);
-	calculate_isha_prayer(compute_time, declination_sun);
-	calculate_maghrib_prayer(compute_time, declination_sun);
+	calculate_fajr_prayer(prayer_struct, declination_sun);
+	calculate_isha_prayer(prayer_struct, declination_sun);
+	calculate_maghrib_prayer(prayer_struct, declination_sun);
 
 	return 0;
 }
@@ -60,18 +60,18 @@ int main(int argc, char **argv)
 {
 	int c;
 	int rc;
-	struct compute_time compute_time = {0};
+	struct prayer_struct prayer_struct = {0};
 	struct calc_param *param;
 
 	while((c = getopt(argc, argv, "hl:L:")) != -1) {
 		switch(c) {
 			case 'l':
-				compute_time.latitude = atof(optarg);
-				fprintf(stdout, "Latitude: %f\n", compute_time.latitude);
+				prayer_struct.latitude = atof(optarg);
+				fprintf(stdout, "Latitude: %f\n", prayer_struct.latitude);
 				break;
 			case 'L':
-				compute_time.longitude = atof(optarg);
-				fprintf(stdout, "Longitude: %f\n", compute_time.longitude);
+				prayer_struct.longitude = atof(optarg);
+				fprintf(stdout, "Longitude: %f\n", prayer_struct.longitude);
 				break;
 
 			case 'h':
@@ -84,7 +84,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	if (compute_time.longitude == 0 || compute_time.latitude == 0) {
+	if (prayer_struct.longitude == 0 || prayer_struct.latitude == 0) {
 		fprintf(stderr, "You need to specify both latitude and longitude\n");
 		return 1;
 	}
@@ -93,7 +93,7 @@ int main(int argc, char **argv)
 	if (param == NULL)
 		return 1;
 
-	rc = calculate_time(&compute_time, param);
+	rc = calculate_time(&prayer_struct, param);
 	if (rc != 0)
 		return 1;
 
