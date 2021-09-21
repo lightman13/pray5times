@@ -6,7 +6,16 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+struct prayer {
+	double fajr;
+	double duhr;
+	double asr;
+	double maghrib;
+	double isha;
+};
+
 struct prayer_struct {
+	struct prayer prayer;
 	float latitude;
 	float longitude;
 	int calc_method;
