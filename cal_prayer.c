@@ -4,17 +4,16 @@
 
 time_t calculate_duhr_prayer(long int timezone, struct prayer_struct *prayer_struct, double equa_of_time)
 {
-	double duhr;
 	int hours;
 	int minutes;
 
-	duhr = 12 + timezone - prayer_struct->longitude / 15 - equa_of_time;
+	prayer_struct->prayer.duhr = 12 + timezone - prayer_struct->longitude / 15 - equa_of_time;
 
-	fprintf(stdout, "Duhr before %lf\n", duhr);
+	fprintf(stdout, "Duhr before %lf\n", prayer_struct->prayer.duhr);
 
-	duhr = range_hour(duhr);
+	prayer_struct->prayer.duhr = range_hour(prayer_struct->prayer.duhr);
 
-	get_float_time_parts(duhr, &hours, &minutes);
+	get_float_time_parts(prayer_struct->prayer.duhr, &hours, &minutes);
 	fprintf(stdout, "Duhr: %d:%d\n", hours, minutes);
 
 	return 0;
@@ -22,7 +21,6 @@ time_t calculate_duhr_prayer(long int timezone, struct prayer_struct *prayer_str
 
 void calculate_fajr_prayer(struct prayer_struct *prayer_struct, double declination_sun)
 {
-	double fajr;
 	double T;
 	double num;
 	double deno;
@@ -41,15 +39,14 @@ void calculate_fajr_prayer(struct prayer_struct *prayer_struct, double declinati
 	T = T / 15;
 
 	fprintf(stdout, "T: %lf\n", T);
-	fajr = 13.512210 - T;
+	prayer_struct->prayer.fajr = prayer_struct->prayer.duhr - T;
 
-	get_float_time_parts(fajr, &hours, &minutes);
+	get_float_time_parts(prayer_struct->prayer.fajr, &hours, &minutes);
 	fprintf(stdout, "Fajr: %d:%d\n", hours, minutes);
 }
 
 void calculate_isha_prayer(struct prayer_struct *prayer_struct, double declination_sun)
 {
-	double isha;
 	double T;
 	double num;
 	double deno;
@@ -68,15 +65,14 @@ void calculate_isha_prayer(struct prayer_struct *prayer_struct, double declinati
 	T = T / 15;
 
 	fprintf(stdout, "T: %lf\n", T);
-	isha = 13.512210 + T;
+	prayer_struct->prayer.isha = prayer_struct->prayer.duhr + T;
 
-	get_float_time_parts(isha, &hours, &minutes);
+	get_float_time_parts(prayer_struct->prayer.isha, &hours, &minutes);
 	fprintf(stdout, "Isha: %d:%d\n", hours, minutes);
 }
 
 void calculate_maghrib_prayer(struct prayer_struct *prayer_struct, double declination_sun)
 {
-	double maghrib;
 	double T;
 	double num;
 	double deno;
@@ -95,8 +91,8 @@ void calculate_maghrib_prayer(struct prayer_struct *prayer_struct, double declin
 	T = T / 15;
 
 	fprintf(stdout, "T: %lf\n", T);
-	maghrib = 13.512210 + T;
+	prayer_struct->prayer.maghrib = prayer_struct->prayer.duhr + T;
 
-	get_float_time_parts(maghrib, &hours, &minutes);
+	get_float_time_parts(prayer_struct->prayer.maghrib, &hours, &minutes);
 	fprintf(stdout, "Maghrib: %d:%d\n", hours, minutes);
 }
