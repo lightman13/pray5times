@@ -51,6 +51,7 @@ static int calculate_time(struct compute_time *compute_time, struct calc_param *
 
 	calculate_fajr_prayer(compute_time, declination_sun);
 	calculate_isha_prayer(compute_time, declination_sun);
+	calculate_maghrib_prayer(compute_time, declination_sun);
 
 	return 0;
 }
