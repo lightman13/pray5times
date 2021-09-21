@@ -64,3 +64,4 @@ double range_hour(double hour);
 double range_angle(double angle);
 void get_float_time_parts(double time, int *hours, int *minutes);
 void calculate_fajr_prayer(struct compute_time *compute_time, double declination_sun);
+void calculate_isha_prayer(struct compute_time *compute_time, double declination_sun);

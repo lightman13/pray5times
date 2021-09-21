@@ -50,6 +50,7 @@ static int calculate_time(struct compute_time *compute_time, struct calc_param *
 	calculate_duhr_prayer(timezone, compute_time, equa_of_time);
 
 	calculate_fajr_prayer(compute_time, declination_sun);
+	calculate_isha_prayer(compute_time, declination_sun);
 
 	return 0;
 }
