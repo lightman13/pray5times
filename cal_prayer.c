@@ -96,3 +96,28 @@ void calculate_maghrib_prayer(struct prayer_struct *prayer_struct, double declin
 	get_float_time_parts(prayer_struct->prayer.maghrib, &hours, &minutes);
 	log_info("Maghrib: %d:%d\n", hours, minutes);
 }
+
+void calculate_asr_prayer(struct prayer_struct *prayer_struct, double declination_sun)
+{
+	double A;
+	double num;
+	double deno;
+	int hours;
+	int minutes;
+
+	num = sin(atan(1 / (1 + tan(degree_to_radian(prayer_struct->latitude) - declination_sun)))) -
+		sin(degree_to_radian(prayer_struct->latitude)) * sin(declination_sun);
+
+	deno = cos(degree_to_radian(prayer_struct->latitude)) * cos(declination_sun);
+
+	A = acos(num / deno);
+
+	A = radian_to_degree(A);
+
+	A = A / 15;
+
+	prayer_struct->prayer.asr = prayer_struct->prayer.duhr + A;
+
+	get_float_time_parts(prayer_struct->prayer.asr, &hours, &minutes);
+	log_info("Asr: %d:%d\n", hours, minutes);
+}
