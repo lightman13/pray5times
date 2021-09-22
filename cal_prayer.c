@@ -36,7 +36,7 @@ void calculate_fajr_prayer(struct prayer_struct *prayer_struct, double declinati
 	T = radian_to_degree(T);
 
 	log_info("T: %lf\n", T);
-	T = T / 15;
+	T = angle_to_hour(T);
 
 	log_info("T: %lf\n", T);
 	prayer_struct->prayer.fajr = prayer_struct->prayer.duhr - T;
@@ -62,7 +62,7 @@ void calculate_isha_prayer(struct prayer_struct *prayer_struct, double declinati
 	T = radian_to_degree(T);
 
 	log_info("T: %lf\n", T);
-	T = T / 15;
+	T = angle_to_hour(T);
 
 	log_info("T: %lf\n", T);
 	prayer_struct->prayer.isha = prayer_struct->prayer.duhr + T;
@@ -88,7 +88,7 @@ void calculate_maghrib_prayer(struct prayer_struct *prayer_struct, double declin
 	T = radian_to_degree(T);
 
 	log_info("T: %lf\n", T);
-	T = T / 15;
+	T = angle_to_hour(T);
 
 	log_info("T: %lf\n", T);
 	prayer_struct->prayer.maghrib = prayer_struct->prayer.duhr + T;
@@ -114,7 +114,7 @@ void calculate_asr_prayer(struct prayer_struct *prayer_struct, double declinatio
 
 	A = radian_to_degree(A);
 
-	A = A / 15;
+	A = angle_to_hour(A);
 
 	prayer_struct->prayer.asr = prayer_struct->prayer.duhr + A;
 
