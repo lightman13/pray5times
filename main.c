@@ -32,20 +32,20 @@ static int calculate_time(struct prayer_struct *prayer_struct, struct calc_param
 
 	timezone = second_to_hour(tm->tm_gmtoff);
 
-	fprintf(stdout, "Date: %d-%02d-%02d\n", tm->tm_year, tm->tm_mon + 1, tm->tm_mday);
+	log_info("Date: %d-%02d-%02d\n", tm->tm_year, tm->tm_mon + 1, tm->tm_mday);
 
-	fprintf(stdout, "Timezone : %ld\n", timezone);
+	log_info("Timezone : %ld\n", timezone);
 
 	param->julian_date = convert_gregorian_to_julian(tm);
 
-	fprintf(stdout, "Julian_Date: %lf\n", param->julian_date);
+	log_info("Julian_Date: %lf\n", param->julian_date);
 
 	compute_equation_of_time(&equa_of_time, param);
 
 	compute_declination_sun(&declination_sun, param);
 
-	fprintf(stdout, "Equation of time : %lf\n", equa_of_time);
-	fprintf(stdout, "Declination of sun : %lf\n", declination_sun);
+	log_info("Equation of time : %lf\n", equa_of_time);
+	log_info("Declination of sun : %lf\n", declination_sun);
 
 	calculate_duhr_prayer(timezone, prayer_struct, equa_of_time);
 
@@ -67,25 +67,25 @@ int main(int argc, char **argv)
 		switch(c) {
 			case 'l':
 				prayer_struct.latitude = atof(optarg);
-				fprintf(stdout, "Latitude: %f\n", prayer_struct.latitude);
+				log_info("Latitude: %f\n", prayer_struct.latitude);
 				break;
 			case 'L':
 				prayer_struct.longitude = atof(optarg);
-				fprintf(stdout, "Longitude: %f\n", prayer_struct.longitude);
+				log_info("Longitude: %f\n", prayer_struct.longitude);
 				break;
 
 			case 'h':
-				fprintf(stdout, "%s\n", usage);
+				log_info("%s\n", usage);
 				break;
 
 			default:
-				fprintf(stderr, "%s\n", usage);
+				log_error("%s\n", usage);
 				break;
 		}
 	}
 
 	if (prayer_struct.longitude == 0 || prayer_struct.latitude == 0) {
-		fprintf(stderr, "You need to specify both latitude and longitude\n");
+		log_error("You need to specify both latitude and longitude\n");
 		return 1;
 	}
 

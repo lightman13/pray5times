@@ -6,6 +6,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#define log_info(...)	do { fprintf(stdout, __VA_ARGS__); } while(0);
+#define log_error(...)	do { fprintf(stderr, __VA_ARGS__); } while(0);
+
 struct prayer {
 	double fajr;
 	double duhr;
