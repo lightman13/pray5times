@@ -11,7 +11,8 @@ valgrind_flags := --leak-check=full --show-leak-kinds=all	\
 PROG := prayer_time
 EXEC := ./prayer_time
 OBJS := main.o utils.o sun_position.o cal_prayer.o
-CFLAGS=-Wall -O -g -lm
+SRC := main.c utils.c sun_position.c cal_prayer.c
+CFLAGS=-Wall -O0 -g -lm
 
 all: prayer_time
 
@@ -21,6 +22,8 @@ prayer_time: ${OBJS}
 clean:
 	rm -f *.o
 	rm -f valgrind-out.txt
+	rm -f *.gcno
+	rm -f *.gcda
 
 mrproper: clean
 	rm -f ${PROG}
@@ -30,3 +33,6 @@ cppcheck:
 
 valgrind: prayer_time
 	valgrind ${valgrind_flags} ${EXEC} -l 1 -L 1 > /dev/null 2>&1
+
+coverage: ${OBJS}
+	${CC} -c ${CFLAGS} -fprofile-arcs -ftest-coverage -lgcov ${SRC} && make -C tests
