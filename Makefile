@@ -8,6 +8,10 @@ valgrind_flags := --leak-check=full --show-leak-kinds=all	\
 		  --track-origins=yes --verbose 		\
 		  --log-file=valgrind-out.txt
 
+# gcovr
+GCOVR := gcovr
+gcovr_flags := -r . --html --html-details -o
+
 PROG := prayer_time
 EXEC := ./prayer_time
 OBJS := main.o utils.o sun_position.o cal_prayer.o
@@ -24,6 +28,7 @@ clean:
 	rm -f valgrind-out.txt
 	rm -f *.gcno
 	rm -f *.gcda
+	rm -rf report-html
 
 mrproper: clean
 	rm -f ${PROG}
@@ -36,3 +41,8 @@ valgrind: prayer_time
 
 coverage: ${OBJS}
 	${CC} -c ${CFLAGS} -fprofile-arcs -ftest-coverage -lgcov ${SRC} && make -C tests
+
+coverage_report: coverage-report.html
+.PHONY: coverage-report.html
+coverage-report.html:
+	mkdir report-html && ${GCOVR} ${gcovr_flags} report-html/$@
