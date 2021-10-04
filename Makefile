@@ -21,7 +21,7 @@ CFLAGS=-Wall -O0 -g -lm
 all: prayer_time
 
 prayer_time: ${OBJS}
-	$(CC) -o ${PROG} ${OBJS} $(CFLAGS)
+	$(CC) -o ${PROG} ${OBJS} ${CFLAGS}
 	
 clean:
 	rm -f *.o
