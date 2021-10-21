@@ -29,6 +29,7 @@ clean:
 	rm -f *.gcno
 	rm -f *.gcda
 	rm -rf report-html
+	make clean -C tests
 
 mrproper: clean
 	rm -f ${PROG}
