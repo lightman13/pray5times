@@ -14,7 +14,7 @@ time_t calculate_duhr_prayer(long int timezone, struct prayer_struct *prayer_str
 	prayer_struct->prayer.duhr = range_hour(prayer_struct->prayer.duhr);
 
 	get_float_time_parts(prayer_struct->prayer.duhr, &hours, &minutes);
-	log_info("Duhr: %d:%d\n", hours, minutes);
+	log_info("Duhr: %d:%02d\n", hours, minutes);
 
 	return 0;
 }
@@ -42,7 +42,7 @@ void calculate_fajr_prayer(struct prayer_struct *prayer_struct, double declinati
 	prayer_struct->prayer.fajr = prayer_struct->prayer.duhr - T;
 
 	get_float_time_parts(prayer_struct->prayer.fajr, &hours, &minutes);
-	log_info("Fajr: %d:%d\n", hours, minutes);
+	log_info("Fajr: %d:%02d\n", hours, minutes);
 }
 
 void calculate_isha_prayer(struct prayer_struct *prayer_struct, double declination_sun)
@@ -68,7 +68,7 @@ void calculate_isha_prayer(struct prayer_struct *prayer_struct, double declinati
 	prayer_struct->prayer.isha = prayer_struct->prayer.duhr + T;
 
 	get_float_time_parts(prayer_struct->prayer.isha, &hours, &minutes);
-	log_info("Isha: %d:%d\n", hours, minutes);
+	log_info("Isha: %d:%02d\n", hours, minutes);
 }
 
 void calculate_maghrib_prayer(struct prayer_struct *prayer_struct, double declination_sun)
@@ -94,7 +94,7 @@ void calculate_maghrib_prayer(struct prayer_struct *prayer_struct, double declin
 	prayer_struct->prayer.maghrib = prayer_struct->prayer.duhr + T;
 
 	get_float_time_parts(prayer_struct->prayer.maghrib, &hours, &minutes);
-	log_info("Maghrib: %d:%d\n", hours, minutes);
+	log_info("Maghrib: %d:%02d\n", hours, minutes);
 }
 
 void calculate_asr_prayer(struct prayer_struct *prayer_struct, double declination_sun)
@@ -119,5 +119,5 @@ void calculate_asr_prayer(struct prayer_struct *prayer_struct, double declinatio
 	prayer_struct->prayer.asr = prayer_struct->prayer.duhr + A;
 
 	get_float_time_parts(prayer_struct->prayer.asr, &hours, &minutes);
-	log_info("Asr: %d:%d\n", hours, minutes);
+	log_info("Asr: %d:%02d\n", hours, minutes);
 }
