@@ -2,7 +2,8 @@
 
 #include "prayer_time.h"
 
-const char *usage= "Usage: prayer_time -h -l [latitude] -L [longitude] -d [date]
+const char *usage= "Usage: prayer_time -h -l [latitude] -L [longitude] -d [date] \
+		    -t [timezone]";
 
 static double convert_gregorian_to_julian(struct tm *tm)
 {
@@ -29,6 +30,7 @@ static int calculate_time(struct prayer_struct *prayer_struct, struct calc_param
 	struct tm *tm;
 
 	if (prayer_struct->tm_custom.tm_year != 0) {
+		timezone = prayer_struct->tm_custom.tm_gmtoff;
 		param->julian_date = convert_gregorian_to_julian(&(prayer_struct->tm_custom));
 	} else {
 		tm = localtime(&t);
@@ -72,7 +74,7 @@ int main(int argc, char **argv)
 	struct prayer_struct prayer_struct = {0};
 	struct calc_param *param;
 
-	while((c = getopt(argc, argv, "d:hl:L:")) != -1) {
+	while((c = getopt(argc, argv, "d:hl:L:t:")) != -1) {
 		switch(c) {
 			case 'd':
 				for (i = 0; i < 3 ; i++) {
@@ -116,6 +118,10 @@ int main(int argc, char **argv)
 				log_info("%s\n", usage);
 				break;
 
+			case 't':
+				prayer_struct.tm_custom.tm_gmtoff = atoi(optarg);
+				log_info("timezone user: %ld\n", prayer_struct.tm_custom.tm_gmtoff);
+				break;
 			default:
 				log_error("%s\n", usage);
 				break;
