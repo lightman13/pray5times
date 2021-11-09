@@ -16,7 +16,7 @@ PROG := prayer_time
 EXEC := ./prayer_time
 OBJS := main.o utils.o sun_position.o cal_prayer.o
 SRC := main.c utils.c sun_position.c cal_prayer.c
-CFLAGS=-Wall -O0 -g -lm
+CFLAGS=-Wall -Werror -O0 -g -lm
 
 all: prayer_time
 
