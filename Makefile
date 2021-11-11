@@ -40,6 +40,9 @@ cppcheck:
 valgrind: prayer_time
 	valgrind ${valgrind_flags} ${EXEC} -l 1 -L 1 > /dev/null 2>&1
 
+check: ${OBJS}
+	${CC} -c ${CFLAGS} ${SRC} && make -C tests
+
 coverage: ${OBJS}
 	${CC} -c ${CFLAGS} -fprofile-arcs -ftest-coverage -lgcov ${SRC} && make -C tests
 
