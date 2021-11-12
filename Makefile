@@ -17,12 +17,17 @@ EXEC := ./prayer_time
 OBJS := main.o utils.o sun_position.o cal_prayer.o
 SRC := main.c utils.c sun_position.c cal_prayer.c
 CFLAGS=-Wall -Werror -O0 -g -lm
+DIR_INSTALL := /usr/local/bin
 
 all: prayer_time
 
 prayer_time: ${OBJS}
 	$(CC) -o ${PROG} ${OBJS} ${CFLAGS}
-	
+
+.PHONY: install
+install:
+	install -m 755 ${PROG} ${DIR_INSTALL}
+
 clean:
 	rm -f *.o
 	rm -f valgrind-out.txt
