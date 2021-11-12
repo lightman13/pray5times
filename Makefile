@@ -28,6 +28,9 @@ prayer_time: ${OBJS}
 install:
 	install -m 755 ${PROG} ${DIR_INSTALL}
 
+.PHONY: uninstall
+uninstall:
+	rm -rf ${DIR_INSTALL}/${PROG}
 clean:
 	rm -f *.o
 	rm -f valgrind-out.txt
