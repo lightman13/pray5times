@@ -2,8 +2,8 @@
 
 #include "prayer_time.h"
 
-const char *usage= "Usage: prayer_time -h -l [latitude] -L [longitude] -d [date] \
-		    -t [timezone]";
+const char *usage= "Usage: prayer_time -h -l [latitude] -L [longitude] -d [date]"
+		    " -t [timezone]";
 
 static double convert_gregorian_to_julian(struct tm *tm)
 {
