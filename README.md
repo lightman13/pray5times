@@ -1,27 +1,52 @@
-In the name of Allah Most Gracious Most Merciful.
+**In the name of Allah Most Gracious Most Merciful.**
 
-"Verily! In the creation of the heavens and the earth, and in the
+*"Verily! In the creation of the heavens and the earth, and in the
 alternation of night and day, there are indeed signs for men of
-understanding" Sura El-Imran, verse 190.
+understanding"* **Sura El-Imran, verse 190.**
 
-This document has the goal to explain the rules of the calculation of
-the prayer time for muslim. Indeed, in Islam there are 5 prayers each
-day. The time of each prayer are defined by the position of the sun during
-the day.
+# How to install
 
-Prayers are :
+To install the project, you have to run:
 
-- Fajr
-- Dohr
-- Asr
-- Maghrib
-- Icha
+`make && sudo make install`
 
-To calculate the time of each prayer we need to calculate the position of the
-sun for a choosen day.
+# How to launch tests and coverage
 
-1. Understanding the sun
+You can use the following command to launch unitary tests:
 
-2. How to calculate the position of the sun for a choosen day
+`make check`
 
-3. How to calculate the time of prayers.
+If you want to know what is the coverage of these tests on the code, you can
+run the following command:
+
+```
+make coverage
+make coverage-report.html
+```
+
+report-html folder is created and you can see the coverage of the code with
+the following commands:
+
+```
+cd report-html
+firefox coverage-report.html
+```
+
+# Check memory leak
+
+There is a target which can detect memory leak. This target use valgrind tool.
+To use it:
+
+`make valgrind`
+
+If any error is reported, we have to fix it before submiting patchs.
+
+# Use Cppcheck
+
+During development it's important to check if each patch is correct before push
+it in master. There is a tool which can detect errors/warnings in C.
+You can run:
+
+`make cppcheck`
+
+Some errors are syntactic. These errors can be ignored.
