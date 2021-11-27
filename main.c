@@ -116,7 +116,7 @@ int main(int argc, char **argv)
 
 			case 'h':
 				log_info("%s\n", usage);
-				break;
+				return 0;
 
 			case 't':
 				prayer_struct.tm_custom.tm_gmtoff = atoi(optarg);
