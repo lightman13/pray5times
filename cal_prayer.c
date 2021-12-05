@@ -9,7 +9,9 @@ time_t calculate_duhr_prayer(long int timezone, struct prayer_struct *prayer_str
 
 	prayer_struct->prayer.duhr = 12 + timezone - prayer_struct->longitude / 15 - equa_of_time;
 
+#ifdef TEST_DEBUG
 	log_info("Duhr before %lf\n", prayer_struct->prayer.duhr);
+#endif
 
 	prayer_struct->prayer.duhr = range_hour(prayer_struct->prayer.duhr);
 
@@ -28,20 +30,35 @@ void calculate_fajr_prayer(struct prayer_struct *prayer_struct, double declinati
 	int minutes;
 
 	num = -sin(degree_to_radian(12)) - sin(degree_to_radian(prayer_struct->latitude)) * sin(declination_sun);
+
+#ifdef DEBUG
 	log_info("num: %lf\n", num);
+#endif
+
 	deno = cos(degree_to_radian(prayer_struct->latitude)) * cos(declination_sun);
+
+#ifdef DEBUG
 	log_info("deno: %lf\n", deno);
+#endif
+
 	T = acos(num / deno);
 
 	T = radian_to_degree(T);
 
+#ifdef DEBUG
 	log_info("T: %lf\n", T);
+#endif
+
 	T = angle_to_hour(T);
 
+#ifdef DEBUG
 	log_info("T: %lf\n", T);
+#endif
+
 	prayer_struct->prayer.fajr = prayer_struct->prayer.duhr - T;
 
 	get_float_time_parts(prayer_struct->prayer.fajr, &hours, &minutes);
+
 	log_info("Fajr: %d:%02d\n", hours, minutes);
 }
 
@@ -54,17 +71,31 @@ void calculate_isha_prayer(struct prayer_struct *prayer_struct, double declinati
 	int minutes;
 
 	num = -sin(degree_to_radian(12)) - sin(degree_to_radian(prayer_struct->latitude)) * sin(declination_sun);
+
+#ifdef DEBUG
 	log_info("num: %lf\n", num);
+#endif
+
 	deno = cos(degree_to_radian(prayer_struct->latitude)) * cos(declination_sun);
+
+#ifdef DEBUG
 	log_info("deno: %lf\n", deno);
+#endif
+
 	T = acos(num / deno);
 
 	T = radian_to_degree(T);
 
+#ifdef DEBUG
 	log_info("T: %lf\n", T);
+#endif
+
 	T = angle_to_hour(T);
 
+#ifdef DEBUG
 	log_info("T: %lf\n", T);
+#endif
+
 	prayer_struct->prayer.isha = prayer_struct->prayer.duhr + T;
 
 	get_float_time_parts(prayer_struct->prayer.isha, &hours, &minutes);
@@ -80,17 +111,31 @@ void calculate_maghrib_prayer(struct prayer_struct *prayer_struct, double declin
 	int minutes;
 
 	num = -sin(degree_to_radian(0.833)) - sin(degree_to_radian(prayer_struct->latitude)) * sin(declination_sun);
+
+#ifdef DEBUG
 	log_info("num: %lf\n", num);
+#endif
+
 	deno = cos(degree_to_radian(prayer_struct->latitude)) * cos(declination_sun);
+
+#ifdef DEBUG
 	log_info("deno: %lf\n", deno);
+#endif
+
 	T = acos(num / deno);
 
 	T = radian_to_degree(T);
 
+#ifdef DEBUG
 	log_info("T: %lf\n", T);
+#endif
+
 	T = angle_to_hour(T);
 
+#ifdef DEBUG
 	log_info("T: %lf\n", T);
+#endif
+
 	prayer_struct->prayer.maghrib = prayer_struct->prayer.duhr + T;
 
 	get_float_time_parts(prayer_struct->prayer.maghrib, &hours, &minutes);
