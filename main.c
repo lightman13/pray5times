@@ -114,7 +114,7 @@ int main(int argc, char **argv)
 				break;
 			default:
 				log_error("%s\n", usage);
-				break;
+				return 1;
 		}
 	}
 
