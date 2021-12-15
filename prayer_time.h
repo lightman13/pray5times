@@ -23,7 +23,8 @@ struct prayer_struct {
 	struct tm tm_custom;
 	float latitude;
 	float longitude;
-	int calc_method;
+	float angle_fajr;
+	float angle_isha;
 };
 
 struct calc_param {
