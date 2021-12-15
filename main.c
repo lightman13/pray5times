@@ -124,8 +124,10 @@ int main(int argc, char **argv)
 	}
 
 	param = calloc(1, sizeof(struct calc_param));
-	if (param == NULL)
+	if (param == NULL) {
+		log_error("Failed to allocate memory\n");
 		return 1;
+	}
 
 	rc = calculate_time(&prayer_struct, param);
 	if (rc != 0)
