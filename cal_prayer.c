@@ -21,7 +21,7 @@ void calculate_fajr_prayer(struct prayer_struct *prayer_struct, double declinati
 	double num;
 	double deno;
 
-	num = -sin(degree_to_radian(12)) - sin(degree_to_radian(prayer_struct->latitude)) * sin(declination_sun);
+	num = -sin(degree_to_radian(prayer_struct->angle_fajr)) - sin(degree_to_radian(prayer_struct->latitude)) * sin(declination_sun);
 
 #ifdef DEBUG
 	log_info("num: %lf\n", num);
@@ -56,7 +56,7 @@ void calculate_isha_prayer(struct prayer_struct *prayer_struct, double declinati
 	double num;
 	double deno;
 
-	num = -sin(degree_to_radian(12)) - sin(degree_to_radian(prayer_struct->latitude)) * sin(declination_sun);
+	num = -sin(degree_to_radian(prayer_struct->angle_isha)) - sin(degree_to_radian(prayer_struct->latitude)) * sin(declination_sun);
 
 #ifdef DEBUG
 	log_info("num: %lf\n", num);
