@@ -2,7 +2,7 @@ CC=gcc
 
 PROG= tests_suite
 DIR_SRC= $(shell cd .. && pwd)
-OBJS= tests_suite.o
+OBJS= tests_suite.o tests_utils.c
 OBJS_SRC= ${DIR_SRC}/utils.o
 
 CFLAGS= -Wall -O -g -lm -lcheck -lgcov
