@@ -17,6 +17,14 @@ START_TEST(test_radian_to_degree) {
 	ck_assert_double_eq_tol(result, 28.64, 0.01);
 } END_TEST
 
+START_TEST(test_angle_to_hour) {
+	double result;
+	extern double angle_to_hour(double);
+
+	result = angle_to_hour(30);
+	ck_assert_double_eq(result, 2);
+}
+
 Suite *utils_suite(void)
 {
 	Suite *s;
@@ -27,6 +35,7 @@ Suite *utils_suite(void)
 
 	tcase_add_test(tc_core, test_degree_to_radian);
 	tcase_add_test(tc_core, test_radian_to_degree);
+	tcase_add_test(tc_core, test_angle_to_hour);
 	suite_add_tcase(s, tc_core);
 
 	return s;
