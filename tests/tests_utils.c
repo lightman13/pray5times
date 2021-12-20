@@ -25,6 +25,14 @@ START_TEST(test_angle_to_hour) {
 	ck_assert_double_eq(result, 2);
 }
 
+START_TEST(test_second_to_hour) {
+	double result;
+	extern long int second_to_hour(long int);
+
+	result = second_to_hour(3600);
+	ck_assert_int_eq(result, 1);
+}
+
 Suite *utils_suite(void)
 {
 	Suite *s;
@@ -36,6 +44,7 @@ Suite *utils_suite(void)
 	tcase_add_test(tc_core, test_degree_to_radian);
 	tcase_add_test(tc_core, test_radian_to_degree);
 	tcase_add_test(tc_core, test_angle_to_hour);
+	tcase_add_test(tc_core, test_second_to_hour);
 	suite_add_tcase(s, tc_core);
 
 	return s;
