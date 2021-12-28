@@ -82,19 +82,19 @@ static int choose_method(char *optarg, struct prayer_struct *prayer_struct)
 	} else if (!strcmp(optarg, method_isna)) {
 		prayer_struct->angle_fajr = 15;
 		prayer_struct->angle_isha = 15;
-	}else if (!strcmp(optarg, method_egas)) {
+	} else if (!strcmp(optarg, method_egas)) {
 		prayer_struct->angle_fajr = 19.5;
 		prayer_struct->angle_isha = 17.5;
-	}else if (!strcmp(optarg, method_uqum)) {
+	} else if (!strcmp(optarg, method_uqum)) {
 		prayer_struct->angle_fajr = 18.5;
 		/* TODO There is no angle for isha in
 		 * Makkah method. Find way to add 90 min
 		 * after maghrib*/
 		prayer_struct->angle_isha = 17;
-	}else if (!strcmp(optarg, method_uisk)) {
+	} else if (!strcmp(optarg, method_uisk)) {
 		prayer_struct->angle_fajr = 18;
 		prayer_struct->angle_isha = 18;
-	}else if (!strcmp(optarg, method_igut)) {
+	} else if (!strcmp(optarg, method_igut)) {
 		prayer_struct->angle_fajr = 17.5;
 		prayer_struct->angle_isha = 14;
 	} else {
