@@ -105,14 +105,56 @@ static int choose_method(char *optarg, struct prayer_struct *prayer_struct)
 	return 0;
 }
 
+static int save_custom_date(char *optarg, struct prayer_struct *prayer_struct)
+{
+	int i;
+	char *date[3];
+	char *sep = "-";
+	char *res;
+
+	for (i = 0; i < 3 ; i++) {
+		date[i] = malloc(4);
+
+		if (date[i] == NULL) {
+			log_error("Memory allocation failed\n");
+			goto free_error;
+		}
+	}
+
+	res = strtok(optarg, sep);
+	memcpy(date[0], res, strlen(res));
+
+	i = 1;
+	while (res != NULL) {
+		res = strtok(NULL, sep);
+		if (res != NULL)
+			memcpy(date[i], res, strlen(res));
+		i++;
+	};
+
+	prayer_struct->tm_custom.tm_mday = atoi(date[2]);
+	prayer_struct->tm_custom.tm_mon = atoi(date[1]);
+	prayer_struct->tm_custom.tm_year = atoi(date[0]);
+
+	for (i = 0; i < 3; i++) {
+		free(date[i]);
+	}
+
+	return 0;
+
+free_error:
+	for (i = 0; i < 3; i++) {
+		if (date[i] != NULL)
+			free(date[i]);
+	}
+
+	return 1;
+}
+
 int main(int argc, char **argv)
 {
 	int c;
 	int rc;
-	int i;
-	char *sep = "-";
-	char *res;
-	char *date[3];
 	struct prayer_struct prayer_struct = {0};
 	struct calc_param *param;
 
@@ -123,33 +165,9 @@ int main(int argc, char **argv)
 	while((c = getopt(argc, argv, "d:hl:L:m:t:")) != -1) {
 		switch(c) {
 			case 'd':
-				for (i = 0; i < 3 ; i++) {
-					date[i] = malloc(4);
-
-					if (date[i] == NULL) {
-						log_error("Memory allocation failed\n");
-						goto free_error;
-					}
-				}
-
-				res = strtok(optarg, sep);
-				memcpy(date[0], res, strlen(res));
-
-				i = 1;
-				while (res != NULL) {
-					res = strtok(NULL, sep);
-					if (res != NULL)
-						memcpy(date[i], res, strlen(res));
-					i++;
-				};
-
-				prayer_struct.tm_custom.tm_mday = atoi(date[0]);
-				prayer_struct.tm_custom.tm_mon = atoi(date[1]);
-				prayer_struct.tm_custom.tm_year = atoi(date[2]);
-
-				for (i = 0; i < 3; i++) {
-					free(date[i]);
-				}
+				rc = save_custom_date(optarg, &prayer_struct);
+				if (rc)
+					return 1;
 				break;
 			case 'l':
 				prayer_struct.latitude = atof(optarg);
@@ -196,11 +214,5 @@ int main(int argc, char **argv)
 
 	return 0;
 
-free_error:
-	for (i = 0; i < 3; i++) {
-		if (date[i] != NULL)
-			free(date[i]);
-	}
 
-	return 1;
 }
