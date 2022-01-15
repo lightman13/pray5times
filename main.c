@@ -132,9 +132,13 @@ static int save_custom_date(char *optarg, struct prayer_struct *prayer_struct)
 		i++;
 	};
 
+	/* We have to substract 1 for month variable and 1900
+	 * for year variable to be consistent with the struct
+	 * tm in time.h
+	 */
 	prayer_struct->tm_custom.tm_mday = atoi(date[2]);
-	prayer_struct->tm_custom.tm_mon = atoi(date[1]);
-	prayer_struct->tm_custom.tm_year = atoi(date[0]);
+	prayer_struct->tm_custom.tm_mon = atoi(date[1]) - 1 ;
+	prayer_struct->tm_custom.tm_year = atoi(date[0]) - 1900;
 
 	for (i = 0; i < 3; i++) {
 		free(date[i]);
