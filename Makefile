@@ -1,4 +1,5 @@
 CC=gcc
+PYLINT := pylint
 CPPCHECK := cppcheck
 cppcheck_flags := --enable=all --inconclusive --inline-suppr	\
 		  --suppress=missingIncludeSystem --library=gnu \
@@ -44,6 +45,9 @@ mrproper: clean
 
 cppcheck:
 	${CPPCHECK} ${cppcheck_flags} *.[ch] 
+
+pylint:
+	${PYLINT} *.py
 
 valgrind: prayer_time
 	valgrind ${valgrind_flags} ${EXEC} -l 1 -L 1 > /dev/null 2>&1
