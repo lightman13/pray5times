@@ -3,6 +3,7 @@ src_files := prayer_time_wrapper.py
 DIR_INSTALL := /usr/local/bin
 PROG := prayer_time_wrapper
 PROG_DIR := dist
+PYLINT := pylint
 
 all: prayer_time_wrapper
 
@@ -20,3 +21,6 @@ install:
 
 uninstall:
 	rm -rf ${DIR_INSTALL}/${PROG}
+
+pylint:
+	${PYLINT} *.py
