@@ -46,9 +46,6 @@ mrproper: clean
 cppcheck:
 	${CPPCHECK} ${cppcheck_flags} *.[ch] 
 
-pylint:
-	${PYLINT} *.py
-
 valgrind: prayer_time
 	valgrind ${valgrind_flags} ${EXEC} -l 1 -L 1 > /dev/null 2>&1
 
