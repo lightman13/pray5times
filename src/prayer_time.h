@@ -83,3 +83,4 @@ void calculate_isha_prayer(struct prayer_struct *prayer_struct, double declinati
 void calculate_maghrib_prayer(struct prayer_struct *prayer_struct, double declination_sun);
 void calculate_asr_prayer(struct prayer_struct *prayer_struct, double declination_sun);
 void print_prayer_time(struct prayer_struct *prayer_struct);
+double minute_to_angle(double minute);
