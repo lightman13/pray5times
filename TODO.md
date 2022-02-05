@@ -1,8 +1,8 @@
 TODO LIST :
 
-- Create wrapper to create file with times prayers for each day
+- Handle timezone in the wrapper (summer hour and winter hour)
 - Add unit tests (coverage objectif >= 30%)
-- Print an output viable
-- Man page
 - Documentation on how to calculate each prayer time
+- Potentially add few minutes at each prayer to be sure the time prayer has
+  passed
 
