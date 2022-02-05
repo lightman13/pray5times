@@ -34,6 +34,11 @@ double angle_to_hour(double angle)
 	return angle / 15;
 }
 
+double minute_to_angle(double minute)
+{
+	return (minute * 15) / 60;
+}
+
 long int second_to_hour(long int second)
 {
 	return second / 60 / 60;
