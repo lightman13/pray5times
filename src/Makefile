@@ -14,11 +14,13 @@ GCOVR := gcovr
 gcovr_flags := -r . --html --html-details -o
 
 PROG := prayer_time
+MAN := prayer_time.1
 EXEC := ./prayer_time
 OBJS := main.o utils.o sun_position.o cal_prayer.o
 SRC := main.c utils.c sun_position.c cal_prayer.c
 override CFLAGS+=-Wall -Werror -O0 -g -lm
 DIR_INSTALL := /usr/local/bin
+DIR_MAN := /usr/local/share/man/man1
 
 all: prayer_time
 
@@ -28,10 +30,12 @@ prayer_time: ${OBJS}
 .PHONY: install
 install:
 	install -m 755 ${PROG} ${DIR_INSTALL}
+	install -m 755 ${MAN} ${DIR_MAN}
 
 .PHONY: uninstall
 uninstall:
 	rm -rf ${DIR_INSTALL}/${PROG}
+	rm -rf ${DIR_MAN}/${MAN}
 clean:
 	rm -f *.o
 	rm -f valgrind-out.txt

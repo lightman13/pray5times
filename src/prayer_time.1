@@ -1,0 +1,41 @@
+.TH PRAYER_TIME 1
+.SH NAME
+prayer_time \- Calculate prayer times and print them
+in the standard output
+.SH SYNOPSYS
+.B prayer_time
+\fB-h\fR [\fB-l\fR latitude] [\fB-L\fR longitude]
+[\fB-d\fR date] [\fB-t\fR timezone]
+[\fB-m\fR method]
+.SH DESCRIPTION
+.B prayer_time
+compute prayer times for this day or a specific day. It calculates
+the five mandatory prayers (\fBFajr\fR - \fBDuhr\fR - \fBAsr\fR -
+\fBMaghrib\fR - \fBIsha\fR).
+.SH OPTIONS
+.TP
+.BR \-h
+Print the usage
+.TP
+.BR \-l
+This is the latitude of your location
+.TP
+.BR \-L
+This is the longitude of your location
+.TP
+.BR \-d
+Choose the date to calculate prayer times. It must be in this format
+YEAR-MONTH-DAY. Example: \fB-d\fR 2022-01-16
+.TP
+.BR \-t
+Specifies the timezone.
+.TP
+.BR \-m
+Specifies the method you want to choose. There are several method. It
+use to calculate Fajr and Isha prayer. Method available are: MWL
+(muslim World league), ISNA (Islamic Society of North America), EGAS
+(Egyptian General Authority of Survey), UQUM (Umm al-qura University,
+Makkah), UISK (University of Islamic Sciences, Karachi), IGUT (Institute
+of Geophysics, University of Teheran) and UOIF (Unions of islamics
+organisations of France). By default, the method is UOIF. Use the
+abbreviation. Example: \fB-m\fR ISNA
