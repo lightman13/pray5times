@@ -40,6 +40,39 @@ def check_cmd():
                 output_err.returncode)
         return output_err.returncode
 
+def search_timezone(today):
+
+    last_day = 31
+    month_march = 3
+    month_october = 10
+    timezone = 0
+
+    month = int(today.strftime('%m'))
+    weekday = today.strftime("%A")
+    day = int(today.strftime("%d"))
+    day = last_day - day
+
+    if month > month_march and month < month_october:
+        timezone = 2
+    if month == month_march:
+        if weekday == "Sunday" and day < 7:
+            timezone = 2
+        elif day < 7 and timezone == 2:
+            timezone = 2
+        else:
+            timezone = 1
+    if month == month_october:
+        if weekday == "Sunday" and day < 7:
+            timezone = 1
+        elif day < 7 and timezone == 1:
+            timezone = 1
+        else:
+            timezone = 2
+    if month > month_october or month < month_march:
+        timezone = 1
+
+    return timezone
+
 def main():
     duration = 1
     file_h = open("prayer_times.txt", 'w')
@@ -82,11 +115,15 @@ def main():
 
     file_h.write(prayer)
     today = datetime.date.today()
+    current_utc = datetime.datetime.utcnow().strftime("%H")
+    current_local = datetime.datetime.now().strftime("%H")
+    timezone = int(current_local) - int(current_utc)
 
     for i in range(duration):
         output = launch_cmd(location, timezone, today)
         process_file(today, file_h, output)
         today += datetime.timedelta(days=1)
+        timezone = search_timezone(today)
 
     file_h.close()
 
