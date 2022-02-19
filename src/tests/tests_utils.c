@@ -23,7 +23,7 @@ START_TEST(test_angle_to_hour) {
 
 	result = angle_to_hour(30);
 	ck_assert_double_eq(result, 2);
-}
+} END_TEST
 
 START_TEST(test_second_to_hour) {
 	double result;
@@ -31,7 +31,7 @@ START_TEST(test_second_to_hour) {
 
 	result = second_to_hour(3600);
 	ck_assert_int_eq(result, 1);
-}
+} END_TEST
 
 START_TEST(test_minute_to_angle) {
 	double result;
@@ -39,7 +39,7 @@ START_TEST(test_minute_to_angle) {
 
 	result = minute_to_angle(90);
 	ck_assert_double_eq(result, 22.5);
-}
+} END_TEST
 
 Suite *utils_suite(void)
 {
