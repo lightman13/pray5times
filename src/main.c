@@ -20,6 +20,7 @@ const char *method_igut = "IGUT";
 /* Union of islamics organisations of France */
 const char *method_uoif = "UOIF";
 
+int calculate_time(struct prayer_struct *prayer_struct, struct calc_param *param)
 {
 	double equa_of_time;
 	double declination_sun;
@@ -54,7 +55,7 @@ const char *method_uoif = "UOIF";
 	return 0;
 }
 
-static int choose_method(char *optarg, struct prayer_struct *prayer_struct)
+int choose_method(char *optarg, struct prayer_struct *prayer_struct)
 {
 	if (!strcmp(optarg, method_uoif)) {
 		prayer_struct->angle_fajr = 12;
