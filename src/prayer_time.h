@@ -84,3 +84,5 @@ void calculate_maghrib_prayer(struct prayer_struct *prayer_struct, double declin
 void calculate_asr_prayer(struct prayer_struct *prayer_struct, double declination_sun);
 void print_prayer_time(struct prayer_struct *prayer_struct);
 double minute_to_angle(double minute);
+double convert_gregorian_to_julian(struct tm *tm);
+int save_custom_date(char *optarg, struct prayer_struct *prayer_struct);
