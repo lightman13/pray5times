@@ -70,7 +70,7 @@ struct calc_param {
 
 int compute_equation_of_time(double *equa_of_time, struct calc_param *param);
 int compute_declination_sun(double *declination_sun, struct calc_param *param);
-time_t calculate_duhr_prayer(long int timezone, struct prayer_struct *prayer_struct, double equa_of_time);
+void calculate_duhr_prayer(long int timezone, struct prayer_struct *prayer_struct, double equa_of_time);
 long int second_to_hour(long int second);
 double angle_to_hour(double angle);
 double degree_to_radian(double degree);
