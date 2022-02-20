@@ -28,6 +28,21 @@ START_TEST(test_julian_date_2) {
 
 } END_TEST
 
+START_TEST(test_save_custom_date) {
+	int result;
+	char optarg[] = "2022-02-19";
+	struct prayer_struct prayer = {0};
+	extern int save_custom_date(char *optarg,
+			struct prayer_struct *prayer_struct);
+
+	result = save_custom_date(optarg, &prayer);
+	ck_assert_int_eq(result, 0);
+	ck_assert_int_eq(prayer.tm_custom.tm_mday, 19);
+	ck_assert_int_eq(prayer.tm_custom.tm_mon, 1);
+	ck_assert_int_eq(prayer.tm_custom.tm_year, 122);
+
+} END_TEST
+
 Suite *date_suite(void)
 {
 	Suite *s;
@@ -38,6 +53,7 @@ Suite *date_suite(void)
 
 	tcase_add_test(tc_core, test_julian_date);
 	tcase_add_test(tc_core, test_julian_date_2);
+	tcase_add_test(tc_core, test_save_custom_date);
 	suite_add_tcase(s, tc_core);
 
 	return s;
