@@ -2,7 +2,7 @@
 
 #include "prayer_time.h"
 
-time_t calculate_duhr_prayer(long int timezone, struct prayer_struct *prayer_struct, double equa_of_time)
+void calculate_duhr_prayer(long int timezone, struct prayer_struct *prayer_struct, double equa_of_time)
 {
 	prayer_struct->prayer.duhr = 12 + timezone - prayer_struct->longitude / 15 - equa_of_time;
 
@@ -11,8 +11,6 @@ time_t calculate_duhr_prayer(long int timezone, struct prayer_struct *prayer_str
 #endif
 
 	prayer_struct->prayer.duhr = range_hour(prayer_struct->prayer.duhr);
-
-	return 0;
 }
 
 void calculate_fajr_prayer(struct prayer_struct *prayer_struct, double declination_sun)
