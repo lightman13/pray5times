@@ -17,6 +17,24 @@ START_TEST(test_calculate_duhr_prayer) {
 
 } END_TEST
 
+/* Calculate Fajr the 21th February 2022
+ * at Grenoble France with method UOIF
+ */
+START_TEST(test_calculate_fajr_prayer) {
+	struct prayer_struct prayer = {0};
+	double declination_sun;
+	extern void calculate_fajr_prayer(struct prayer_struct *prayer_struct,
+			double);
+
+	prayer.latitude = 45.20350804593916;
+	prayer.angle_fajr = 12;
+	prayer.prayer.duhr = 12.850572;
+	declination_sun = -0.195128;
+
+	calculate_fajr_prayer(&prayer, declination_sun);
+	ck_assert_double_eq_tol(prayer.prayer.fajr, 6.46129, 0.00001);
+} END_TEST
+
 Suite *cal_prayer_suite(void)
 {
 	Suite *s;
@@ -26,6 +44,7 @@ Suite *cal_prayer_suite(void)
 	tc_core = tcase_create("Core");
 
 	tcase_add_test(tc_core, test_calculate_duhr_prayer);
+	tcase_add_test(tc_core, test_calculate_fajr_prayer);
 	suite_add_tcase(s, tc_core);
 
 	return s;
