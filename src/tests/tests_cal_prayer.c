@@ -53,6 +53,23 @@ START_TEST(test_calculate_isha_prayer) {
 	ck_assert_double_eq_tol(prayer.prayer.isha, 19.239855, 0.00001);
 } END_TEST
 
+/* Calculate Maghrib the 21th February 2022
+ * at Grenoble France with method UOIF
+ */
+START_TEST(test_calculate_maghrib_prayer) {
+	struct prayer_struct prayer = {0};
+	double declination_sun;
+	extern void calculate_maghrib_prayer(struct prayer_struct *prayer_struct,
+			double);
+
+	prayer.latitude = 45.20350804593916;
+	prayer.prayer.duhr = 12.850572;
+	declination_sun = -0.195128;
+
+	calculate_maghrib_prayer(&prayer, declination_sun);
+	ck_assert_double_eq_tol(prayer.prayer.maghrib, 18.166944, 0.00001);
+} END_TEST
+
 Suite *cal_prayer_suite(void)
 {
 	Suite *s;
@@ -64,6 +81,7 @@ Suite *cal_prayer_suite(void)
 	tcase_add_test(tc_core, test_calculate_duhr_prayer);
 	tcase_add_test(tc_core, test_calculate_fajr_prayer);
 	tcase_add_test(tc_core, test_calculate_isha_prayer);
+	tcase_add_test(tc_core, test_calculate_maghrib_prayer);
 	suite_add_tcase(s, tc_core);
 
 	return s;
