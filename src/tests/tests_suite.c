@@ -11,6 +11,7 @@ int main(void)
 	runner = srunner_create(s);
 	srunner_add_suite(runner, date_suite());
 	srunner_add_suite(runner, sun_position_suite());
+	srunner_add_suite(runner, cal_prayer_suite());
 
 	srunner_run_all(runner, CK_NORMAL);
 	no_failed = srunner_ntests_failed(runner);
