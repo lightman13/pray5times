@@ -15,6 +15,7 @@ tests_suite: ${OBJS}
 
 clean:
 	rm -rf *.o
+	rm -f *.tap
 
 mrproper: clean
 	rm -rf ${PROG}
