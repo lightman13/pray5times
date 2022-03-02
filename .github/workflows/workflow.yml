@@ -1,0 +1,28 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install gcovr
+      run: sudo apt-get install -y gcovr
+    - name: Clone libcheck
+      run: git clone https://github.com/libcheck/check.git
+    - name: Install libcheck
+      run: cd check/ && autoreconf --install && ./configure && make && sudo make install && sudo ldconfig
+    - name: make
+      run: cd src/ && make
+    - name: make coverage
+      run: cd src/ && make coverage
+    - name: Print result tap
+      if: always()
+      run: cat src/tests/*.tap
