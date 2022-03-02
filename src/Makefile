@@ -19,8 +19,8 @@ EXEC := ./prayer_time
 OBJS := main.o utils.o sun_position.o cal_prayer.o date.o
 SRC := main.c utils.c sun_position.c cal_prayer.c date.c
 override CFLAGS+=-Wall -Werror -O0 -g -lm
-DIR_INSTALL := /usr/local/bin
-DIR_MAN := /usr/local/share/man/man1
+DIR_INSTALL := /usr/bin
+DIR_MAN := /usr/share/man/man1
 
 all: prayer_time
 
