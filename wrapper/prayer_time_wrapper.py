@@ -30,7 +30,7 @@ def launch_cmd(location, timezone, date):
     return output
 
 def check_cmd():
-    cmd = "ls /usr/local/bin/prayer_time"
+    cmd = "ls /usr/bin/prayer_time"
 
     try:
         output = subprocess.check_output(cmd, shell=True)

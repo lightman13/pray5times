@@ -1,6 +1,6 @@
 PYINSTALLER := pyinstaller
 src_files := prayer_time_wrapper.py
-DIR_INSTALL := /usr/local/bin
+DIR_INSTALL := /usr/bin
 PROG := prayer_time_wrapper
 PROG_DIR := dist
 PYLINT := pylint
