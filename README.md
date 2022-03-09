@@ -10,6 +10,17 @@ To install the project, you have to run:
 
 `make && sudo make install`
 
+# How to generate rpm
+
+To generate rpms of the project you need to launch:
+
+`./build.sh`
+
+Then rpms packages are generated in the release directory.
+To install in your machine, just do in the release directory :
+
+`sudo dnf localinstall *.rpm`
+
 # How to launch tests and coverage
 
 You can use the following command to launch unitary tests:
