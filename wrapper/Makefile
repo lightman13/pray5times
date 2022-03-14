@@ -1,13 +1,13 @@
 PYINSTALLER := pyinstaller
-src_files := prayer_time_wrapper.py
+src_files := pray5times-wrapper.py
 DIR_INSTALL := /usr/bin
-PROG := prayer_time_wrapper
+PROG := pray5times-wrapper
 PROG_DIR := dist
 PYLINT := pylint
 
-all: prayer_time_wrapper
+all: pray5times-wrapper
 
-prayer_time_wrapper:
+pray5times-wrapper:
 	${PYINSTALLER} --onefile ${src_files}
 
 clean:

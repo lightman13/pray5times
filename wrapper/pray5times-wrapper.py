@@ -6,7 +6,7 @@ import sys
 import subprocess
 from geopy.geocoders import Nominatim
 
-usage = "prayer_time_wrapper -h -l --location= -t --timezone= -d --duration="
+usage = "pray5times_wrapper -h -l --location= -t --timezone= -d --duration="
 prayer = "\t\tFajr\tDuhr\tAsr\tMaghrib\tIsha\n"
 
 def process_file(date, file_h, output):
@@ -19,7 +19,7 @@ def process_file(date, file_h, output):
     file_h.write("\n")
 
 def launch_cmd(location, timezone, date):
-    command = "prayer_time -l" + str(location.latitude) + " -L" + \
+    command = "pray5times -l" + str(location.latitude) + " -L" + \
             str(location.longitude) + " -d" + str(date) + " -t" + \
             str(timezone)
 
@@ -30,13 +30,13 @@ def launch_cmd(location, timezone, date):
     return output
 
 def check_cmd():
-    cmd = "ls /usr/bin/prayer_time"
+    cmd = "ls /usr/bin/pray5times"
 
     try:
         output = subprocess.check_output(cmd, shell=True)
         return 0
     except subprocess.CalledProcessError as output_err:
-        print("You must install prayer_time. Return code",
+        print("You must install pray5times. Return code",
                 output_err.returncode)
         return output_err.returncode
 
@@ -75,7 +75,7 @@ def search_timezone(today):
 
 def main():
     duration = 1
-    file_h = open("prayer_times.txt", 'w')
+    file_h = open("pray5times.txt", 'w')
     location = ""
 
     rc = check_cmd()
@@ -110,7 +110,7 @@ def main():
         print(usage)
         sys.exit(1)
 
-    geolocator = Nominatim(user_agent="prayer_time")
+    geolocator = Nominatim(user_agent="pray5times")
     location = geolocator.geocode(location)
 
     file_h.write(prayer)

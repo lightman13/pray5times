@@ -13,18 +13,18 @@ valgrind_flags := --leak-check=full --show-leak-kinds=all	\
 GCOVR := gcovr
 gcovr_flags := -r . --html --html-details -o
 
-PROG := prayer_time
-MAN := prayer_time.1
-EXEC := ./prayer_time
+PROG := pray5times
+MAN := pray5times.1
+EXEC := ./pray5times
 OBJS := main.o utils.o sun_position.o cal_prayer.o date.o
 SRC := main.c utils.c sun_position.c cal_prayer.c date.c
 override CFLAGS+=-Wall -Werror -O0 -g -lm
 DIR_INSTALL := /usr/bin
 DIR_MAN := /usr/share/man/man1
 
-all: prayer_time
+all: pray5times
 
-prayer_time: ${OBJS}
+pray5times: ${OBJS}
 	$(CC) -o ${PROG} ${OBJS} ${CFLAGS}
 
 .PHONY: install
@@ -50,7 +50,7 @@ mrproper: clean
 cppcheck:
 	${CPPCHECK} ${cppcheck_flags} *.[ch] 
 
-valgrind: prayer_time
+valgrind: pray5times
 	valgrind ${valgrind_flags} ${EXEC} -l 1 -L 1 > /dev/null 2>&1
 
 check: ${OBJS}

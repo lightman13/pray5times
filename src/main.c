@@ -2,7 +2,7 @@
 
 #include "prayer_time.h"
 
-const char *usage= "Usage: prayer_time -h -l [latitude] -L [longitude] -d [date]"
+const char *usage= "Usage: pray5times -h -l [latitude] -L [longitude] -d [date]"
 		    " -t [timezone] -m [method]";
 
 int calculate_time(struct prayer_struct *prayer_struct, struct calc_param *param)

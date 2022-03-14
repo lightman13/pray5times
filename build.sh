@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 TOP_DIR=$PWD
-name=prayer_time
+name=pray5times
 
 clean() {
 	rm -rf $TOP_DIR/release
@@ -9,7 +9,7 @@ clean() {
 }
 
 gen_tar() {
-	git archive --format=tar.gz -o $TOP_DIR/$name-$version.tar.gz \
+	git archive --format=tar.gz -o $TOP_DIR/$name-$version-$patchlevel.tar.gz \
 		--prefix=muslim_prayer/ main
 }
 
@@ -18,11 +18,13 @@ gen_rpm() {
 
 	gen_tar
 
-	mv $name-$version.tar.gz $TOP_DIR/rpmbuild/SOURCES/
+	mv $name-$version-$patchlevel.tar.gz $TOP_DIR/rpmbuild/SOURCES/
 
-	rpmbuild --define "_topdir `pwd`/rpmbuild" --define "git_version $version" -bs $name.spec
+	rpmbuild --define "_topdir `pwd`/rpmbuild" --define "git_version $version"\
+		--define "patchlevel $patchlevel" -bs $name.spec
 
-	rpmbuild --define "_topdir `pwd`/rpmbuild" --define "git_version $version" --rebuild $TOP_DIR/rpmbuild/SRPMS/*.rpm
+	rpmbuild --define "_topdir `pwd`/rpmbuild" --define "git_version $version"\
+		--define "patchlevel $patchlevel" --rebuild $TOP_DIR/rpmbuild/SRPMS/*.rpm
 
 	mkdir release/
 
@@ -31,7 +33,13 @@ gen_rpm() {
 }
 
 arch=$(rpm --eval %{_arch})
-version=$(git describe | sed s/v//g)
+version=$(git describe | cut -d "-" -f 1 | sed s/v//g)
+patchlevel="$(git describe | cut -d "-" -f 2)"
+
+if [ -z $patchlevel ]
+then
+	$patchlevel=""
+fi
 
 clean
 gen_rpm
