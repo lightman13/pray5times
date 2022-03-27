@@ -4,6 +4,33 @@
 alternation of night and day, there are indeed signs for men of
 understanding"* **Sura El-Imran, verse 190.**
 
+# What is pray5times project ?
+
+Pray5times is an open source project which has the purpose to calculate
+5 prayers time with the algorithm visible to everyone. Before the creation
+of the project, I realized there was not enough of ressources to understand
+how prayer times was calculated.
+
+To calculate each prayer time I used the following ressources:
+
+- Meeus, J. (1998). Astronomical Algorithms. Willmann-Bell, Inc.
+- [praytimes.org](http://praytimes.org/wiki/Prayer_Times_Calculation)
+
+I used the book to calculate the equation of time and the declination of the
+sun. Then, to calculate each prayer time I used the
+[praytimes.org](http://praytimes.org/wiki/Prayer_Times_Calculation).
+
+If you want to improve your knowledge about how to calculate prayer time or you
+want to use the code for your own project, I invite anyone to participate
+maintain/improve the project.
+
+# What is pray5times-wrapper ?
+
+This is a wrapper on pray5times software. It allows to calculate prayer times on
+several days and years if you want. And it takes string location in contrary of
+pray5times software which takes longitude and latitude coordonates. The wrapper
+generate text file output with five prayers times.
+
 # How to install
 
 To install the project, you have to run:
