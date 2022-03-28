@@ -31,5 +31,5 @@ install -m 0755 src/%{name}.1 %{buildroot}/%{_mandir}/%{name}.1
 %{_mandir}/%{name}.1
 
 %changelog
-* Mon Mar 07 2022 Mehdi Bendahhou <mehdi.bendahhou@gmail.com> - 0.0.0
+* Mon Mar 07 2022 Mehdi <pray5times.project@gmail.com> - 0.0.0
 - Initial version
