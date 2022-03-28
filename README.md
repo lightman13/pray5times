@@ -31,13 +31,13 @@ several days and years if you want. And it takes string location in contrary of
 pray5times software which takes longitude and latitude coordonates. The wrapper
 generate text file output with five prayers times.
 
-# How to install
+# How to install from sources
 
 To install the project, you have to run:
 
 `make && sudo make install`
 
-# How to generate rpm
+# How to generate and install rpm package
 
 To generate rpms of the project you need to launch:
 
@@ -48,16 +48,21 @@ To install in your machine, just do in the release directory :
 
 `sudo dnf localinstall *.rpm`
 
-# How to launch tests and coverage
+# Developer section
+## How to launch tests and coverage
 
 You can use the following command to launch unitary tests:
 
-`make check`
+```
+cd src/
+make check
+```
 
 If you want to know what is the coverage of these tests on the code, you can
 run the following command:
 
 ```
+cd src/
 make coverage
 make coverage-report.html
 ```
@@ -70,21 +75,37 @@ cd report-html
 firefox coverage-report.html
 ```
 
-# Check memory leak
+## Check memory leak
 
 There is a target which can detect memory leak. This target use valgrind tool.
 To use it:
 
-`make valgrind`
+```
+cd src/
+make valgrind
+```
 
 If any error is reported, we have to fix it before submiting patchs.
 
-# Use Cppcheck
+## Use Cppcheck
 
 During development it's important to check if each patch is correct before push
 it in master. There is a tool which can detect errors/warnings in C.
 You can run:
 
-`make cppcheck`
+```
+cd src
+make cppcheck
+```
 
 Some errors are syntactic. These errors can be ignored.
+
+## Use Pylint
+
+As the wrapper is developped in Python, you can use the following command to
+check if there are any errors/warnings in python:
+
+```
+cd wrapper
+make pylint
+```
