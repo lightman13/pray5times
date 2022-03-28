@@ -9,7 +9,7 @@ Source:		%{name}-%{git_version}-%{?patchlevel}.tar.gz
 Calculate prayer times
 
 %prep
-%setup -qn muslim_prayer
+%setup -qn pray5times
 
 %build
 make

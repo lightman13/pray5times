@@ -10,7 +10,7 @@ clean() {
 
 gen_tar() {
 	git archive --format=tar.gz -o $TOP_DIR/$name-$version-$patchlevel.tar.gz \
-		--prefix=muslim_prayer/ main
+		--prefix=pray5times/ main
 }
 
 gen_rpm() {
