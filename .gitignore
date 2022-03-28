@@ -1,2 +1,5 @@
 *.o
-prayer_time
+pray5times
+release/
+rpmbuild/
+src/tests/tests_suite
