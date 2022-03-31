@@ -41,12 +41,20 @@ To install the project, you have to run:
 
 To generate rpms of the project you need to launch:
 
-`./build.sh`
+`./build.sh rpm`
 
 Then rpms packages are generated in the release directory.
 To install in your machine, just do in the release directory :
 
 `sudo dnf localinstall *.rpm`
+
+# How to generate deb package
+
+To generate deb package you need to launch:
+
+`./build.sh deb`
+
+Then debian package are generated in the release directory.
 
 # Developer section
 ## How to launch tests and coverage

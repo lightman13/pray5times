@@ -6,6 +6,7 @@ name=pray5times
 clean() {
 	rm -rf $TOP_DIR/release
 	rm -rf $TOP_DIR/rpmbuild
+	rm -rf $TOP_DIR/${name}_0.0-0
 }
 
 gen_tar() {
@@ -32,6 +33,27 @@ gen_rpm() {
 	cp $TOP_DIR/rpmbuild/SRPMS/*.src.rpm $TOP_DIR/release/
 }
 
+gen_deb() {
+	mkdir ${name}_0.0-0/
+	mkdir -p ${name}_0.0-0/usr/bin
+	mkdir -p ${name}_0.0-0/usr/share/man/man1/
+	mkdir ${name}_0.0-0/DEBIAN/
+
+	make clean && make
+
+	cp $TOP_DIR/src/$name $TOP_DIR/${name}_0.0-0/usr/bin
+	cp $TOP_DIR/wrapper/dist/$name-wrapper $TOP_DIR/${name}_0.0-0/usr/bin
+	cp $TOP_DIR/src/$name.1 $TOP_DIR/${name}_0.0-0/usr/share/man/man1/
+
+	cp $TOP_DIR/control $TOP_DIR/${name}_0.0-0/DEBIAN
+
+	dpkg-deb --build ${name}_0.0-0
+
+	mkdir release/
+
+	mv *.deb release/
+}
+
 arch=$(rpm --eval %{_arch})
 version=$(git describe | cut -d "-" -f 1 | sed s/v//g)
 patchlevel="$(git describe | cut -d "-" -f 2)"
@@ -41,5 +63,17 @@ then
 	$patchlevel=""
 fi
 
-clean
-gen_rpm
+if [ $1 == "clean" ]
+then
+	clean
+fi
+
+if [ $1 == "rpm" ]
+then
+	gen_rpm
+fi
+
+if [ $1 == "deb" ]
+then
+	gen_deb
+fi
