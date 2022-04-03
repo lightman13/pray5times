@@ -36,12 +36,14 @@ gen_rpm() {
 gen_deb() {
 	mkdir ${name}_0.0-0/
 	mkdir -p ${name}_0.0-0/usr/bin
+	mkdir -p ${name}_0.0-0/usr/lib64
 	mkdir -p ${name}_0.0-0/usr/share/man/man1/
 	mkdir ${name}_0.0-0/DEBIAN/
 
 	make clean && make
 
 	cp $TOP_DIR/src/$name $TOP_DIR/${name}_0.0-0/usr/bin
+	cp $TOP_DIR/lib/libpray5times.so $TOP_DIR/${name}_0.0-0/usr/lib64
 	cp $TOP_DIR/wrapper/dist/$name-wrapper $TOP_DIR/${name}_0.0-0/usr/bin
 	cp $TOP_DIR/src/$name.1 $TOP_DIR/${name}_0.0-0/usr/share/man/man1/
 
