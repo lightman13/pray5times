@@ -31,6 +31,9 @@ clean:
 	rm -f *.gcda
 	rm -f *.gcno
 
+mrproper: clean
+	rm -f ${LIB}
+
 check: ${OBJS}
 	${CC} -c ${CFLAGS} ${SRC} && make -C tests
 
