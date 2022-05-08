@@ -85,6 +85,5 @@ void calculate_asr_prayer(struct prayer_struct *prayer_struct, double declinatio
 void print_prayer_time(struct prayer_struct *prayer_struct);
 double minute_to_angle(double minute);
 double convert_gregorian_to_julian(struct tm *tm);
-int calculate_time(struct prayer_struct *prayer_struct, struct calc_param *param);
 int choose_method(char *optarg, struct prayer_struct *prayer_struct);
 int save_custom_date(char *optarg, struct prayer_struct *prayer_struct);
