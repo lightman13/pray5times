@@ -42,6 +42,7 @@ clean:
 	rm -rf __pycache__
 	rm -f *.java
 	rm -f *.class
+	rm -f libpray5times_wrap.c
 
 mrproper: clean
 	rm -f ${LIB}
