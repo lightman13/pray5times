@@ -22,3 +22,4 @@ uninstall:
 
 clean:
 	rm -f *.o
+	rm -f *.so
