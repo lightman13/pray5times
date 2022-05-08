@@ -6,6 +6,8 @@ SWIG=swig
 SWIG_FILE=libpray5times.i
 SWIG_OUTPUT=libpray5times_wrap
 PYTHON_PATH=/usr/include/python3.9/
+JAVA_PATH=/usr/lib/jvm/java/include
+JAVA_PATH_LINUX=/usr/lib/jvm/java/include/linux/
 
 CFLAGS+=-Wall -Werror -O0 -g -lm -fpic
 SRC := sun_position.c utils.c cal_prayer.c date.c
@@ -38,6 +40,8 @@ clean:
 	rm -f *.gcno
 	rm -f *.py
 	rm -rf __pycache__
+	rm -f *.java
+	rm -f *.class
 
 mrproper: clean
 	rm -f ${LIB}
@@ -59,3 +63,9 @@ python:
 	${CC} -c ${SRC} ${CFLAGS}
 	${CC} -c ${SWIG_OUTPUT}.c ${CFLAGS} -I${PYTHON_PATH}
 	${CC} -shared -o _${LIB} ${OBJS} ${SWIG_OUTPUT}.o
+
+java:
+	${SWIG} -java ${SWIG_FILE}
+	${CC} -c ${SRC} ${CFLAGS}
+	${CC} -c ${SWIG_OUTPUT}.c ${CFLAGS} -I${JAVA_PATH} -I${JAVA_PATH_LINUX}
+	${CC} -shared -o ${LIB} ${OBJS} ${SWIG_OUTPUT}.o
