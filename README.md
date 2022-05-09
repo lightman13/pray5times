@@ -6,10 +6,13 @@ understanding"* **Sura El-Imran, verse 190.**
 
 # What is pray5times project ?
 
-Pray5times is an open source project which has the purpose to calculate
-5 prayers time with the algorithm visible to everyone. Before the creation
-of the project, I realized there was not enough of ressources to understand
-how prayer times was calculated.
+Pray5times is a library which allow to calculate the 5 prayers. The library is
+available in several language thanks to langage bindings.
+
+Supported languages:
+- C
+- Python
+- Java
 
 To calculate each prayer time I used the following ressources:
 
@@ -19,10 +22,6 @@ To calculate each prayer time I used the following ressources:
 I used the book to calculate the equation of time and the declination of the
 sun. Then, to calculate each prayer time I used the
 [praytimes.org](http://praytimes.org/wiki/Prayer_Times_Calculation).
-
-If you want to improve your knowledge about how to calculate prayer time or you
-want to use the code for your own project, I invite anyone to participate
-maintain/improve the project.
 
 # What is pray5times-wrapper ?
 
@@ -36,6 +35,24 @@ generate text file output with five prayers times.
 To install the project, you have to run:
 
 `make && sudo make install`
+
+
+# How to compile in another langage of C ?
+
+To compile the project in another language you can use the Makefile as follow.
+For example, if you want to compile the library in Java you have to do the
+following commands:
+
+```
+cd lib
+make java
+```
+
+For each language there is a target in the makefile to compile the library.
+
+For now there are only 2 language supported :
+- Python
+- Java
 
 # How to generate and install rpm package
 
@@ -62,7 +79,7 @@ Then debian package are generated in the release directory.
 You can use the following command to launch unitary tests:
 
 ```
-cd src/
+cd lib/
 make check
 ```
 
@@ -70,7 +87,7 @@ If you want to know what is the coverage of these tests on the code, you can
 run the following command:
 
 ```
-cd src/
+cd lib/
 make coverage
 make coverage-report.html
 ```
