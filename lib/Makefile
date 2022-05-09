@@ -1,6 +1,11 @@
 CC=gcc
 LIB=libpray5times.so
 
+#Cppcheck
+CPPCHECK := cppcheck
+cppcheck_flags := --enable=all --inconclusive --inline-suppr    \
+		  --suppress=missingIncludeSystem --library=gnu \
+		  --quiet --suppress=unusedFunction
 #Swig
 SWIG=swig
 SWIG_FILE=libpray5times.i
@@ -46,6 +51,9 @@ clean:
 
 mrproper: clean
 	rm -f ${LIB}
+
+cppcheck:
+	${CPPCHECK} ${cppcheck_flags} *.[ch]
 
 check: ${OBJS}
 	${CC} -c ${CFLAGS} ${SRC} && make -C tests
