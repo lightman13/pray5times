@@ -32,10 +32,12 @@ pray5times:
 .PHONY: install
 install:
 	install -m 755 ${LIB} ${DIR_INSTALL}
+	install -m 755 prayer_time.h /usr/include/
 
 .PHONY: uninstall
 uninstall:
 	rm -rf ${DIR_INSTALL}/${LIB}
+	rm -f /usr/include/prayer_time.h
 
 clean:
 	rm -f *.o
