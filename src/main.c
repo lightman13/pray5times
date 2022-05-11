@@ -1,6 +1,6 @@
 /* In the name of Allah */
 
-#include "prayer_time.h"
+#include <prayer_time.h>
 
 const char *usage= "Usage: pray5times -h -l [latitude] -L [longitude] -d [date]"
 		    " -t [timezone] -m [method]";
