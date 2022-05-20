@@ -22,10 +22,12 @@ gen_rpm() {
 	mv $name-$version-$patchlevel.tar.gz $TOP_DIR/rpmbuild/SOURCES/
 
 	rpmbuild --define "_topdir `pwd`/rpmbuild" --define "git_version $version"\
-		--define "patchlevel $patchlevel" -bs $name.spec
+		--define "patchlevel $patchlevel"\
+		--define "language $language" -bs $name.spec
 
 	rpmbuild --define "_topdir `pwd`/rpmbuild" --define "git_version $version"\
-		--define "patchlevel $patchlevel" --rebuild $TOP_DIR/rpmbuild/SRPMS/*.rpm
+		--define "patchlevel $patchlevel"\
+		--define "language $language" --rebuild $TOP_DIR/rpmbuild/SRPMS/*.rpm
 
 	mkdir release/
 
@@ -59,6 +61,7 @@ gen_deb() {
 arch=$(rpm --eval %{_arch})
 version=$(git describe | cut -d "-" -f 1 | sed s/v//g)
 patchlevel="$(git describe | cut -d "-" -f 2)"
+language=$2
 
 if [ -z $patchlevel ]
 then

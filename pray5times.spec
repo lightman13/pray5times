@@ -1,6 +1,6 @@
 Name:		pray5times
 Version:	%{git_version}
-Release:	%{patchlevel}.rc1%{?dist}
+Release:	%{patchlevel}.%{language}%{?dist}
 Summary:	Calculate prayers times
 License:	MIT
 Source:		%{name}-%{git_version}-%{?patchlevel}.tar.gz
@@ -12,10 +12,10 @@ Calculate prayer times
 %setup -qn pray5times
 
 %build
-make
+make %{language}
 
 %check
-cd src/ && make check
+cd lib/ && make check
 
 %install
 mkdir -p %{buildroot}/%{_bindir}

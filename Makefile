@@ -1,7 +1,17 @@
-all:
+C:
 	make -C wrapper
 	make -C src
 	make -C lib
+
+java:
+	make -C wrapper
+	make -C src
+	make java -C lib
+
+python:
+	make -C wrapper
+	make -C src
+	make python -C lib
 
 clean:
 	make clean -C wrapper
