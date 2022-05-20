@@ -26,12 +26,12 @@ jobs:
     - name: Install libcheck
       run: cd check/ && autoreconf --install && ./configure && make && sudo make install && sudo ldconfig
     - name: make
-      run: cd src/ && make
+      run: cd lib/ && make
     - name: make coverage
-      run: cd src/ && make coverage
+      run: cd lib/ && make coverage
     - name: Print result tap
       if: always()
-      run: cat src/tests/*.tap
+      run: cat lib/tests/*.tap
     - name: Build rpm package
       run: ./build.sh
     - name: Archive rpm package
