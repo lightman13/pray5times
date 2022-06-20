@@ -1,5 +1,6 @@
 CC=gcc
 LIB=libpray5times.so
+LIB_DLL=libpray5times.dll
 
 #Cppcheck
 CPPCHECK := cppcheck
@@ -31,7 +32,7 @@ pray5times:
 
 .PHONY: install
 install:
-	install -m 755 ${LIB} ${DIR_INSTALL}
+	install -m 755 ${LIB_DLL} ${DIR_INSTALL}
 	install -m 755 prayer_time.h /usr/include/
 
 .PHONY: uninstall
@@ -80,3 +81,9 @@ java:
 	${CC} -c ${SRC} ${CFLAGS}
 	${CC} -c ${SWIG_OUTPUT}.c ${CFLAGS} -I${JAVA_PATH} -I${JAVA_PATH_LINUX}
 	${CC} -shared -o ${LIB} ${OBJS} ${SWIG_OUTPUT}.o
+
+csharp:
+	${SWIG} -csharp ${SWIG_FILE}
+	${CC} -c ${SRC} ${CFLAGS}
+	${CC} -c ${SWIG_OUTPUT}.c ${CFLAGS}
+	${CC} -shared -o ${LIB_DLL} ${OBJS} ${SWIG_OUTPUT}.o
