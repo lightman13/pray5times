@@ -51,6 +51,8 @@ clean:
 	rm -f *.java
 	rm -f *.class
 	rm -f libpray5times_wrap.c
+	rm -f *.cs
+	rm -f *.dll
 
 mrproper: clean
 	rm -f ${LIB}
