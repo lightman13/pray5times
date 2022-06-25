@@ -13,6 +13,11 @@ python:
 	make -C src
 	make python -C lib
 
+csharp:
+	make -C wrapper
+	make -C src
+	make csharp -C lib
+
 clean:
 	make clean -C wrapper
 	make clean -C src
