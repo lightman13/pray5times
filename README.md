@@ -13,6 +13,7 @@ Supported languages:
 - C
 - Python
 - Java
+- C#
 
 To calculate each prayer time I used the following ressources:
 
@@ -23,9 +24,14 @@ I used the book to calculate the equation of time and the declination of the
 sun. Then, to calculate each prayer time I used the
 [praytimes.org](http://praytimes.org/wiki/Prayer_Times_Calculation).
 
+# Example using the library
+
+In the directory src/ there is an example of using the library pray5times in a
+small application which print each prayers time.
+
 # What is pray5times-wrapper ?
 
-This is a wrapper on pray5times software. It allows to calculate prayer times on
+This is a wrapper on pray5times example software. It allows to calculate prayer times on
 several days and years if you want. And it takes string location in contrary of
 pray5times software which takes longitude and latitude coordonates. The wrapper
 generate text file output with five prayers times.
@@ -35,7 +41,6 @@ generate text file output with five prayers times.
 To install the project, you have to run:
 
 `make && sudo make install`
-
 
 # How to compile in another langage of C ?
 
@@ -50,15 +55,18 @@ make java
 
 For each language there is a target in the makefile to compile the library.
 
-For now there are only 2 language supported :
+For now there are only 3 language supported :
 - Python
 - Java
+- C#
 
 # How to generate and install rpm package
 
 To generate rpms of the project you need to launch:
 
-`./build.sh rpm`
+`./build.sh rpm LANGUAGE_DESIRED`
+
+When LANGUAGE_DESIRED is the language you want to target.
 
 Then rpms packages are generated in the release directory.
 To install in your machine, just do in the release directory :
@@ -72,6 +80,9 @@ To generate deb package you need to launch:
 `./build.sh deb`
 
 Then debian package are generated in the release directory.
+
+For now the deb packaging is only for pray5times library compiled
+in C.
 
 # Developer section
 ## How to launch tests and coverage
@@ -109,7 +120,6 @@ To use it:
 cd src/
 make valgrind
 ```
-
 If any error is reported, we have to fix it before submiting patchs.
 
 ## Use Cppcheck
