@@ -32,8 +32,14 @@ jobs:
     - name: Print result tap
       if: always()
       run: cat lib/tests/*.tap
-    - name: Build rpm package
-      run: ./build.sh
+    - name: Build rpm package java
+      run: ./build.sh rpm java
+    - name: Build rpm package C
+      run: ./build.sh rpm
+    - name: Build rpm package csharp
+      run: ./build.sh rpm csharp
+    - name: Build rpm package python
+      run: ./build.sh rpm python
     - name: Archive rpm package
       uses: actions/upload-artifact@v3
       with:
