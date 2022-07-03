@@ -15,7 +15,7 @@ PYTHON_PATH=/usr/include/python3.9/
 JAVA_PATH=/usr/lib/jvm/java/include
 JAVA_PATH_LINUX=/usr/lib/jvm/java/include/linux/
 
-CFLAGS+=-Wall -Werror -O0 -g -lm -fpic
+CFLAGS+=-Wall -Werror -O2 -g -lm -fpic
 SRC := sun_position.c utils.c cal_prayer.c date.c
 OBJS := sun_position.o utils.o cal_prayer.o date.o
 DIR_INSTALL := /usr/lib64
