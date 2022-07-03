@@ -1,22 +1,22 @@
 C:
 	make -C wrapper
-	make -C src
 	make -C lib
+	make -C src
 
 java:
 	make -C wrapper
-	make -C src
 	make java -C lib
+	make -C src
 
 python:
 	make -C wrapper
-	make -C src
 	make python -C lib
+	make -C src
 
 csharp:
 	make -C wrapper
-	make -C src
 	make csharp -C lib
+	make -C src
 
 clean:
 	make clean -C wrapper
