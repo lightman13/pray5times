@@ -30,9 +30,12 @@ pray5times:
 	${CC} -c ${SRC} ${CFLAGS}
 	${CC} -shared -o ${LIB} ${OBJS}
 
+install_chsarp:
+	install -m 755 ${LIB_DLL} ${DIR_INSTALL}
+
 .PHONY: install
 install:
-	install -m 755 ${LIB_DLL} ${DIR_INSTALL}
+	install -m 755 ${LIB} ${DIR_INSTALL}
 	install -m 755 prayer_time.h /usr/include/
 
 .PHONY: uninstall
