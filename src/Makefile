@@ -13,7 +13,7 @@ MAN := pray5times.1
 EXEC := ./pray5times
 OBJS := main.o
 SRC := main.c
-override CFLAGS+=-Wall -Werror -O0 -g -lm -lpray5times
+override CFLAGS+=-Wall -Werror -O2 -g -lm -lpray5times
 DIR_INSTALL := /usr/bin
 DIR_MAN := /usr/share/man/man1
 
